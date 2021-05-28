@@ -25,7 +25,7 @@ Faculty::Faculty(int id, string username, string name, string pass, string userR
     this->fullName = name;
     this->password = pass;
     this->role = userRole;
-    this->optionsList =  {"1   Print your course list", "2   Edit a students grade"};
+    this->optionsList =  {"Faculty Menus: ","1   Print your course list", "2   Edit a students grade"};
     courses = classList;
 
 };

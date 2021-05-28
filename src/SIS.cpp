@@ -129,15 +129,16 @@ void SIS::test()
     cout << setfill(' ') << setw(25) << "This is a test\n\n\n\n\n\n\n"
         << endl;
 
-    // User user1 = User(1,"rsmith","Robert Smith","password1","student");
-    // user1.showOptions();
+    User user1 = User(1,"rsmith","Robert Smith","password1","staff");
+    user1.showOptions();
     Course c1 = Course("calc2", 5, 'A', "M.Hubbard");
     Course c2 = Course("calc3", 5, 'A', "M.Hubbard");
     vector<Course> v1 = {c1,c2};
     Student s1 = Student(1,"rsmith","Robert Smith","password1","student", v1);
-    s1.printReport();
     s1.showOptions();
+    s1.printReport();
     Faculty f1 = Faculty(2,"rsmith","Robert Smith","password1","faculty", v1);
+    f1.showOptions();
     f1.listClasses();
 };
 
