@@ -1,12 +1,11 @@
-#include "./src/ObjectModels/Course.cpp"
+#include "./src/SIS.cpp"
 
 using namespace std;
 
 int main()
 {
-    cout << "working"
-         << "\n\n\n\n\n\n\n";
-    Course c = Course("ABC", 4, 'A', "Omar");
-    c.printReport();
+    SIS sis = SIS();
+    sis.run();
+
     return 1;
 }
