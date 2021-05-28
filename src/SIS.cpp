@@ -70,7 +70,18 @@ void SIS::authenticate()
 
 void SIS::saveData()
 {
-    cout << "data saving placeholder" << endl;
+    ofstream outFile;
+
+    char outFilename[21] = "./Data/tempdata.txt";
+    outFile.open(outFilename);
+    cout << "Opening data file to save" << endl;
+    if (outFile.fail())
+    {
+        cout << "Failed to open the output file" << endl;
+        std::exit(1);
+    };
+    outFile.close();
+    cout << "Data successfuly saved" << endl;
 }
 void SIS::runREPL()
 {
