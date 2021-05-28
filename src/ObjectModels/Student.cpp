@@ -1,4 +1,5 @@
 #include "./User.cpp"
+#include "./Course.cpp"
 #include <iostream>
 #include <iomanip>
 
@@ -6,26 +7,38 @@ using namespace std;
 
 class Student : public User {    // Sub class
 private:
-    vector<string>& st;
-    string fullName;
+    vector<Course> courses;
+
     
-public:
-    static const int PrintWidth = 10;           // Spacing of text in print report
-    Student(vector<string>& arr) : st(arr){}    // Initialized vector contructor
+public:           
+    Student(){}
+    Student(int, string, string, string, string, vector<Course>);   
     
-    void printStReport(vector <string>);          // Prints current courses
+    void printReport();          // Prints current courses
     friend void registerForCourse();            // Friend of SIS
 };
 
-void Student::printStReport(vector <string>) {
+Student::Student(int id, string username, string name, string pass, string userRole, vector<Course> classList)
+{
+    this->userID = id;
+    this->userName = username;
+    this->fullName = name;
+    this->password = pass;
+    this->role = userRole;
+    this->optionsList = {"1   Print Grade Report", "2    Register for Classes"};
+    courses = classList;
+
+};
+
+void Student::printReport() {
     // Header for report
-    cout << "Report for " << fullName << " ." << endl;
-    cout << "Course" << setw(PrintWidth) << "Faculty" << setw(PrintWidth) << "Credits" << setw(PrintWidth) << "Grade" << endl;
-    cout << setw(40) << setfill('_') << "\n" << endl;
+    cout << "Report for " << this -> getName() << ".\nID number" << this-> getUserID() << endl;
+    cout << "Course" << setw(15) << "Instructor" << setw(15) << "Credits" << setw(15) << "Grade" << endl;
+    cout << setw(60) << setfill('_') << "\n" << endl;
     
     // For loop prints report from vector
-    for(int i = 0; i < st.size(); i++) {
-        cout << st[i] << setw(PrintWidth) << endl;
+    for(Course course: this->courses) {
+        course.printReport();
     }
 
 }

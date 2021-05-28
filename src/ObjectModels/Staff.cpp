@@ -1,0 +1,1 @@
+vector<string> staffOptions = {"1   Print Student Report", "2    Add an instructor to a course", "3    Add a course w/o an instructor"};
