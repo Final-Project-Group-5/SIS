@@ -1,5 +1,6 @@
 #include "./ObjectModels/Course.cpp"
-#include "./ObjectModels/Student.cpp"
+#include "./ObjectModels/User.cpp"
+// #include "./ObjectModels/Student.cpp"
 #include <algorithm>
 #include <iostream>
 
@@ -127,12 +128,15 @@ void SIS::test()
     cout << setfill(' ') << setw(25) << "This is a test\n\n\n\n\n\n\n"
         << endl;
 
-    vector<string> st;
-        st.push_back("Aaron");
-    Student objFA(st);
-    objFA.printStReport(st);
+    // vector<string> st;
+    //     st.push_back("Aaron");
+    // Student objFA(st);
+    // objFA.printStReport(st);
 
-    registerForCourse(objFA);
+    // registerForCourse(objFA);
+
+    User user1 = User(1,"rsmith","Robert Smith","password1","student");
+    user1.showOptions();
 };
 
 void SIS::exit()
