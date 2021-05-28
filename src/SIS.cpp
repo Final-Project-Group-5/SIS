@@ -126,7 +126,7 @@ void SIS::run()
 
 void SIS::test()
 {
-    cout << setfill(' ') << setw(25) << "This is a test\n\n\n\n\n\n\n"
+    cout << setfill(' ') << setw(25) << "This is a test\n\n"
         << endl;
 
     User user1 = User(1,"rsmith","Robert Smith","password1","staff");
@@ -136,10 +136,14 @@ void SIS::test()
     vector<Course> v1 = {c1,c2};
     Student s1 = Student(1,"rsmith","Robert Smith","password1","student", v1);
     s1.showOptions();
+    cout << endl;
     s1.printReport();
-    Faculty f1 = Faculty(2,"rsmith","Robert Smith","password1","faculty", v1);
+    cout << endl;
+    Faculty f1 = Faculty(2,"pjohnson","Patricia Johnson","password2","faculty", v1);
     f1.showOptions();
+    cout <<  endl;
     f1.listClasses();
+    cout << "\n\n" << "Test Over" << "\n\n" << endl;
 };
 
 void SIS::exit()

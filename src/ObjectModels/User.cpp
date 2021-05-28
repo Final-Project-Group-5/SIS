@@ -1,7 +1,5 @@
 #include <string>
 #include <vector>
-
- 
 #pragma once
 
 using namespace std;
@@ -21,9 +19,6 @@ protected:
         fullName;
     string role;
     vector<string> optionsList;
- 
-  
-
 };
 
 User::User(int id, string username, string name, string pass, string userRole){

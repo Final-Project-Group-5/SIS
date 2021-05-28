@@ -15,7 +15,7 @@ public:
     Faculty(int, string, string, string, string, vector<Course>);   
     
     void listClasses();          
-    friend void registerForCourse();            
+    void editGrades();           
 };
 
 Faculty::Faculty(int id, string username, string name, string pass, string userRole, vector<Course> classList)
@@ -36,4 +36,21 @@ void Faculty::listClasses()
     for(Course course: this -> courses) {
         course.printReport();
     }
+}
+
+void Faculty::editGrades()
+{
+    string course;
+    cout << "Please enter the course code of the class in which the students whos grade you would like to modify is enrolled" << endl;
+    this->listClasses();
+    cin >> course;
+    // Here we need to figure out how to read from the SIS.studentsRoster follow the code below
+    // for(Student student: SIS.studentRoster){
+    //      int indexOf = find(student.courses.begin(), student.courses.end(), course);
+    //      if(indexOf != student.courses.end())
+    //      {
+    //          student.courses[indexOf].printreport();
+    //      }
+    // }
+
 }
