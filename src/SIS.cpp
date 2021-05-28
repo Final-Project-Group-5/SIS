@@ -1,4 +1,5 @@
 #include "./ObjectModels/Course.cpp"
+#include "./ObjectModels/Student.cpp"
 #include <algorithm>
 #include <iostream>
 
@@ -123,8 +124,15 @@ void SIS::run()
 
 void SIS::test()
 {
-    cout << setfill(*) << setw(25) << "This is a test\n\n\n\n\n\n\n"
-         << endl;
+    cout << setfill(' ') << setw(25) << "This is a test\n\n\n\n\n\n\n"
+        << endl;
+
+    vector<string> st;
+        st.push_back("Aaron");
+    Student objFA(st);
+    objFA.printStReport(st);
+
+    registerForCourse(objFA);
 };
 
 void SIS::exit()
