@@ -1,7 +1,5 @@
 #include "./src/SIS.cpp"
 
-using namespace std;
-
 int main()
 {
     SIS sis = SIS();

@@ -12,6 +12,7 @@ public:
     void loadData();
     void saveData();
     void run();
+    void exit();
     void runREPL();
 
 private:
@@ -37,15 +38,15 @@ void SIS::loadData()
     cout << "Please hold while system data is loaded." << endl;
 
     //  Open data streams, read from file constructing all of the user and course objects needed while storing them to the SIS vectors
-    cout << "Opening file" << endl;
+
     char inFilename[17] = "./Data/data.txt";
     inFile.open(inFilename);
     if (inFile.fail())
     {
         cout << "Failed to open the input file" << endl;
-        exit(1);
+        std::exit(1);
     };
-    cout << "File opened" << endl;
+
     while (getline(inFile, line))
     {
         // cout << line << endl;
@@ -67,6 +68,10 @@ void SIS::authenticate()
     cout << username << " " << password << endl;
 }
 
+void SIS::saveData()
+{
+    cout << "data saving placeholder" << endl;
+}
 void SIS::runREPL()
 {
     int commandCode;
@@ -78,6 +83,10 @@ void SIS::runREPL()
     {
         cout << "Please enter a command: ";
         cin >> commandCode;
+        if (commandCode == 0)
+        {
+            REPLRunning = 0;
+        }
         // if (count(this->currentUser.commandList.begin(), this->currentUser.commandList.end(), commandCode))
         // {
         //     // this ->currentUser.runCommand(commandCode);
@@ -95,4 +104,18 @@ void SIS::run()
     this->authenticate();
     // this->currentUser.printOptions()
     this->runREPL();
+    this->exit();
+};
+
+void SIS::exit()
+{
+    int trigger;
+
+    cout << "Would you like to save all of the changes made during this session? (1 = Yes, 0=No): ";
+    cin >> trigger;
+    if (trigger)
+    {
+        saveData();
+    }
+    cout << "Thank you for using SIS." << endl;
 };
