@@ -1,6 +1,7 @@
 #include "./ObjectModels/Course.cpp"
 #include "./ObjectModels/User.cpp"
 #include "./ObjectModels/Student.cpp"
+#include "./ObjectModels/Faculty.cpp"
 #include <algorithm>
 #include <iostream>
 
@@ -22,8 +23,8 @@ private:
     // auto currentUser;
     vector<Course> availableCourses;
     vector<Course> allCourses;
+    vector<Student> studentRoster;
     // vector<Faculty> facultyRoster;
-    // vector<Student> studentRoster;
     // vector<Staff> staffRoster;
 };
 
@@ -128,13 +129,6 @@ void SIS::test()
     cout << setfill(' ') << setw(25) << "This is a test\n\n\n\n\n\n\n"
         << endl;
 
-    // vector<string> st;
-    //     st.push_back("Aaron");
-    // Student objFA(st);
-    // objFA.printStReport(st);
-
-    // registerForCourse(objFA);
-
     // User user1 = User(1,"rsmith","Robert Smith","password1","student");
     // user1.showOptions();
     Course c1 = Course("calc2", 5, 'A', "M.Hubbard");
@@ -142,6 +136,9 @@ void SIS::test()
     vector<Course> v1 = {c1,c2};
     Student s1 = Student(1,"rsmith","Robert Smith","password1","student", v1);
     s1.printReport();
+    s1.showOptions();
+    Faculty f1 = Faculty(2,"rsmith","Robert Smith","password1","faculty", v1);
+    f1.listClasses();
 };
 
 void SIS::exit()

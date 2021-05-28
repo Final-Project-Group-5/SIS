@@ -25,16 +25,16 @@ Student::Student(int id, string username, string name, string pass, string userR
     this->fullName = name;
     this->password = pass;
     this->role = userRole;
-    this->optionsList = {"1   Print Grade Report", "2    Register for Classes"};
+    this->optionsList = {"1   Print Grade Report", "2   Register for Classes"};
     courses = classList;
 
 };
 
 void Student::printReport() {
     // Header for report
-    cout << "Report for " << this -> getName() << ".\nID number" << this-> getUserID() << endl;
+    cout << "Report for " << this -> getName() << ".\nID number: " << this-> getUserID() << endl;
     cout << "Course" << setw(15) << "Instructor" << setw(15) << "Credits" << setw(15) << "Grade" << endl;
-    cout << setw(60) << setfill('_') << "\n" << endl;
+    cout << setw(60) << setfill('_') << "\n"<<setfill(' ') << endl;
     
     // For loop prints report from vector
     for(Course course: this->courses) {
