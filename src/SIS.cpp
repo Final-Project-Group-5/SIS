@@ -14,6 +14,7 @@ public:
     void run();
     void exit();
     void runREPL();
+    void test();
 
 private:
     // auto currentUser;
@@ -110,12 +111,20 @@ void SIS::runREPL()
 }
 void SIS::run()
 {
+
+    this->test();
     cout << "Welcome to SIS." << endl;
     this->loadData();
     this->authenticate();
     // this->currentUser.printOptions()
     this->runREPL();
     this->exit();
+};
+
+void SIS::test()
+{
+    cout << setfill(*) << setw(25) << "This is a test\n\n\n\n\n\n\n"
+         << endl;
 };
 
 void SIS::exit()
