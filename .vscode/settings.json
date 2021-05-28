@@ -2,6 +2,8 @@
   "C_Cpp_Runner.cCompilerPath": "C:\\Program Files\\JetBrains\\CLion 2019.2.1\\bin\\clang",
   "C_Cpp_Runner.debuggerPath": "C:\\Program Files\\JetBrains\\CLion 2019.2.1\\bin\\gdb",
   "files.associations": {
-    "iomanip": "cpp"
+    "iomanip": "cpp",
+    "iostream": "cpp",
+    "xstring": "cpp"
   }
 }

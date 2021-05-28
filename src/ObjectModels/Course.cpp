@@ -15,7 +15,7 @@ public:
     int getCredits();
     int getGPV();
 
-protected:
+private:
     string courseCode,
         instructor;
     int gpv,
