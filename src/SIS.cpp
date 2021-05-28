@@ -14,6 +14,7 @@ public:
     void run();
     void exit();
     void runREPL();
+    void test();
 
 private:
     // auto currentUser;
@@ -70,7 +71,18 @@ void SIS::authenticate()
 
 void SIS::saveData()
 {
-    cout << "data saving placeholder" << endl;
+    ofstream outFile;
+
+    char outFilename[21] = "./Data/tempdata.txt";
+    outFile.open(outFilename);
+    cout << "Opening data file to save" << endl;
+    if (outFile.fail())
+    {
+        cout << "Failed to open the output file" << endl;
+        std::exit(1);
+    };
+    outFile.close();
+    cout << "Data successfuly saved" << endl;
 }
 void SIS::runREPL()
 {
@@ -99,12 +111,20 @@ void SIS::runREPL()
 }
 void SIS::run()
 {
+
+    this->test();
     cout << "Welcome to SIS." << endl;
     this->loadData();
     this->authenticate();
     // this->currentUser.printOptions()
     this->runREPL();
     this->exit();
+};
+
+void SIS::test()
+{
+    cout << setfill(*) << setw(25) << "This is a test\n\n\n\n\n\n\n"
+         << endl;
 };
 
 void SIS::exit()
