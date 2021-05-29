@@ -83,7 +83,6 @@ void SIS::loadData()
         //     cout << arg << endl;
         // };
 
-        cout << (tempUserRole) << endl;
         if (tempUserRole == "student")
         {
             cout << "creating student" << endl;
