@@ -1,6 +1,6 @@
 #include "./ObjectModels/Course.cpp"
-#include "./ObjectModels/User.cpp"
 #include "./ObjectModels/Student.cpp"
+#include "./ObjectModels/Staff.cpp"
 #include "./ObjectModels/Faculty.cpp"
 #include <algorithm>
 #include <iostream>
@@ -26,7 +26,7 @@ private:
     vector<Course> allCourses;
     vector<Student> studentRoster;
     vector<Faculty> facultyRoster;
-    // vector<Staff> staffRoster;
+    vector<Staff> staffRoster;
 };
 
 SIS::SIS()
@@ -99,7 +99,10 @@ void SIS::loadData()
         }
         else
         {
-            cout << "Conditions not triggered" << endl;
+            cout << "creating staff" << endl;
+            Staff tempStaff = Staff(tempID, tempUserName, tempUserFullName, tempUserPassword, tempUserRole);
+            staffRoster.push_back(tempStaff);
+            tempStaff.showOptions();
         };
     };
 
@@ -140,7 +143,7 @@ void SIS::runREPL()
 
     int REPLRunning = 1;
     // this -> currentUser.showOptions();
-
+    cout << "You can exit the command loop by entering option 0." << endl;
     while (REPLRunning)
     {
         cout << "Please enter a command: ";
