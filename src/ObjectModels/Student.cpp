@@ -18,7 +18,7 @@ public:
     friend void registerForCourse(); // Friend of SIS
 };
 
-Student::Student(int id, string username, string name, string pass, string userRole, vector<Course> classList)
+Student::Student(int id, string username, string name, string pass, string userRole, vector<Course> classList = {})
 {
     this->userID = id;
     this->userName = username;

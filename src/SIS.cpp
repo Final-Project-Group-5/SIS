@@ -25,7 +25,7 @@ private:
     vector<Course> availableCourses;
     vector<Course> allCourses;
     vector<Student> studentRoster;
-    // vector<Faculty> facultyRoster;
+    vector<Faculty> facultyRoster;
     // vector<Staff> staffRoster;
 };
 
@@ -38,7 +38,6 @@ void SIS::loadData()
     ofstream outFile;
     ifstream inFile;
     string line;
-    string full;
 
     cout << "Please hold while system data is loaded." << endl;
 
@@ -54,21 +53,55 @@ void SIS::loadData()
 
     while (getline(inFile, line))
     {
+        cout << line << endl;
         stringstream s_stream(line); //create string stream from the string
+
         vector<string> argVector;
+
+        int tempID;
+
+        string tempUserName,
+            tempUserFullName,
+            tempUserPassword,
+            tempUserRole;
+
         while (s_stream.good())
         {
             string arg;
             getline(s_stream, arg, ','); //get first string delimited by comma
             argVector.push_back(arg);
-        }
-        cout << line << endl;
-        for (string arg : argVector)
-        {
-            cout << arg << endl;
-        }
+        };
 
-        // full += line + "\n";
+        tempID = stoi(argVector[0]);
+        tempUserName = argVector[1];
+        tempUserFullName = argVector[2];
+        tempUserPassword = argVector[3];
+        tempUserRole = argVector[4];
+
+        // for (string arg : argVector)
+        // {
+        //     cout << arg << endl;
+        // };
+
+        cout << (tempUserRole) << endl;
+        if (tempUserRole == "student")
+        {
+            cout << "creating student" << endl;
+            Student tempStudent = Student(tempID, tempUserName, tempUserFullName, tempUserPassword, tempUserRole);
+            studentRoster.push_back(tempStudent);
+            tempStudent.showOptions();
+        }
+        else if (tempUserRole == "faculty")
+        {
+            cout << "creating faculty" << endl;
+            Faculty tempFaculty = Faculty(tempID, tempUserName, tempUserFullName, tempUserPassword, tempUserRole);
+            facultyRoster.push_back(tempFaculty);
+            tempFaculty.showOptions();
+        }
+        else
+        {
+            cout << "Conditions not triggered" << endl;
+        };
     };
 
     inFile.close();
