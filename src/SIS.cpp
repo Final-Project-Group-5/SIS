@@ -3,7 +3,6 @@
 #include "./ObjectModels/Staff.cpp"
 #include "./ObjectModels/Faculty.cpp"
 #include <algorithm>
-#include <iostream>
 #include <sstream>
 
 using namespace std;
@@ -21,7 +20,7 @@ public:
     void test();
 
 private:
-    // auto currentUser;
+    // static auto currentUser;
     vector<Course> availableCourses;
     vector<Course> allCourses;
     vector<Student> studentRoster;
