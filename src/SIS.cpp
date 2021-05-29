@@ -4,6 +4,7 @@
 #include "./ObjectModels/Faculty.cpp"
 #include <algorithm>
 #include <iostream>
+#include <sstream>
 
 using namespace std;
 
@@ -53,12 +54,26 @@ void SIS::loadData()
 
     while (getline(inFile, line))
     {
-        // cout << line << endl;
-        full += line + "\n";
+        stringstream s_stream(line); //create string stream from the string
+        vector<string> argVector;
+        while (s_stream.good())
+        {
+            string arg;
+            getline(s_stream, arg, ','); //get first string delimited by comma
+            argVector.push_back(arg);
+        }
+        cout << line << endl;
+        for (string arg : argVector)
+        {
+            cout << arg << endl;
+        }
+
+        // full += line + "\n";
     };
+
     inFile.close();
     cout << "System data loaded" << endl;
-    cout << full;
+    // cout << full;
 }
 void SIS::authenticate()
 {
@@ -85,7 +100,7 @@ void SIS::saveData()
         std::exit(1);
     };
     outFile.close();
-    cout << "Data successfuly saved" << endl;
+    cout << "Data successfully saved" << endl;
 }
 void SIS::runREPL()
 {
@@ -127,23 +142,26 @@ void SIS::run()
 void SIS::test()
 {
     cout << setfill(' ') << setw(25) << "This is a test\n\n"
-        << endl;
+         << endl;
 
-    User user1 = User(1,"rsmith","Robert Smith","password1","staff");
+    User user1 = User(1, "rsmith", "Robert Smith", "password1", "staff");
     user1.showOptions();
     Course c1 = Course("calc2", 5, 'A', "M.Hubbard");
     Course c2 = Course("calc3", 5, 'A', "M.Hubbard");
-    vector<Course> v1 = {c1,c2};
-    Student s1 = Student(1,"rsmith","Robert Smith","password1","student", v1);
+    vector<Course> v1 = {c1, c2};
+    Student s1 = Student(1, "rsmith", "Robert Smith", "password1", "student", v1);
     s1.showOptions();
     cout << endl;
     s1.printReport();
     cout << endl;
-    Faculty f1 = Faculty(2,"pjohnson","Patricia Johnson","password2","faculty", v1);
+    Faculty f1 = Faculty(2, "pjohnson", "Patricia Johnson", "password2", "faculty", v1);
     f1.showOptions();
-    cout <<  endl;
+    cout << endl;
     f1.listClasses();
-    cout << "\n\n" << "Test Over" << "\n\n" << endl;
+    cout << "\n\n"
+         << "Test Over"
+         << "\n\n"
+         << endl;
 };
 
 void SIS::exit()
