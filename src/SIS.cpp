@@ -131,6 +131,7 @@ void SIS::saveData()
     outFile.close();
     cout << "Data successfully saved" << endl;
 }
+
 void SIS::runREPL()
 {
     int commandCode;
@@ -152,7 +153,7 @@ void SIS::runREPL()
         // }
         // else
         // {
-        //     cout << "Input error, please re-enter command"
+        //     cout << "Input error, please re-enter a valid command";
         // }
     };
 }
