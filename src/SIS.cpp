@@ -53,7 +53,7 @@ void SIS::loadData()
 
     while (getline(inFile, line))
     {
-        cout << line << endl;
+        // cout << line << endl;
         stringstream s_stream(line); //create string stream from the string
 
         vector<string> argVector;
@@ -85,24 +85,18 @@ void SIS::loadData()
 
         if (tempUserRole == "student")
         {
-            cout << "creating student" << endl;
             Student tempStudent = Student(tempID, tempUserName, tempUserFullName, tempUserPassword, tempUserRole);
-            studentRoster.push_back(tempStudent);
-            tempStudent.showOptions();
+            this->studentRoster.push_back(tempStudent);
         }
         else if (tempUserRole == "faculty")
         {
-            cout << "creating faculty" << endl;
             Faculty tempFaculty = Faculty(tempID, tempUserName, tempUserFullName, tempUserPassword, tempUserRole);
-            facultyRoster.push_back(tempFaculty);
-            tempFaculty.showOptions();
+            this->facultyRoster.push_back(tempFaculty); 
         }
         else
         {
-            cout << "creating staff" << endl;
             Staff tempStaff = Staff(tempID, tempUserName, tempUserFullName, tempUserPassword, tempUserRole);
-            staffRoster.push_back(tempStaff);
-            tempStaff.showOptions();
+            this->staffRoster.push_back(tempStaff);
         };
     };
 
@@ -165,9 +159,9 @@ void SIS::runREPL()
 void SIS::run()
 {
 
-    this->test();
     cout << "Welcome to SIS." << endl;
     this->loadData();
+    this->test();
     this->authenticate();
     // this->currentUser.printOptions()
     this->runREPL();
@@ -179,20 +173,25 @@ void SIS::test()
     cout << setfill(' ') << setw(25) << "This is a test\n\n"
          << endl;
 
-    User user1 = User(1, "rsmith", "Robert Smith", "password1", "staff");
-    user1.showOptions();
-    Course c1 = Course("calc2", 5, 'A', "M.Hubbard");
-    Course c2 = Course("calc3", 5, 'A', "M.Hubbard");
-    vector<Course> v1 = {c1, c2};
-    Student s1 = Student(1, "rsmith", "Robert Smith", "password1", "student", v1);
-    s1.showOptions();
-    cout << endl;
-    s1.printReport();
-    cout << endl;
-    Faculty f1 = Faculty(2, "pjohnson", "Patricia Johnson", "password2", "faculty", v1);
-    f1.showOptions();
-    cout << endl;
-    f1.listClasses();
+    cout << "Student Roster:\n" <<endl;
+    for(Student s: this->studentRoster)
+    {
+        cout << s.getName() << endl;
+    }
+
+
+    cout << "\n\nFaculty Roster:\n" <<endl;
+    for(Faculty f: this->facultyRoster)
+    {
+        cout << f.getName() << endl;
+    }
+
+    cout << "\n\nStaff Roster:\n" <<endl;
+    for(Staff st: this->staffRoster)
+    {
+        cout << st.getName() << endl;
+    }
+
     cout << "\n\n"
          << "Test Over"
          << "\n\n"

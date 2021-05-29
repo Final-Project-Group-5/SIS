@@ -9,6 +9,7 @@ public:
     User(){}
     User(int, string, string, string, string);
     string getName();
+    void showName();
     int getUserID();
     void showOptions();
 
@@ -40,6 +41,11 @@ void User::showOptions()
 string User::getName()
 {
     return fullName;
+}
+
+void User::showName()
+{
+    cout << fullName << endl;
 }
 
 int User::getUserID()
