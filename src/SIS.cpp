@@ -18,6 +18,7 @@ public:
     void exit();
     void runREPL();
     void test();
+    vector<Student> getStudentRoster();
 
 private:
     //static auto currentUser;
@@ -164,9 +165,9 @@ void SIS::run()
     cout << "Welcome to SIS." << endl;
     this->loadData();
     this->test();
-    this->authenticate();
+    //this->authenticate();
     // this->currentUser.printOptions()
-    this->runREPL();
+    //this->runREPL();
     this->exit();
 };
 
@@ -175,27 +176,29 @@ void SIS::test()
     cout << setfill(' ') << setw(25) << "This is a test\n\n"
          << endl;
 
-    cout << "Student Roster:\n" <<endl;
-    for(Student s: this->studentRoster)
-    {
-        cout << s.getName() << endl;
-        s.showOptions();
-    }
+       User user1 = User(1, "rsmith", "Robert Smith", "password1", "staff");
+       //user1.showOptions();
+       Course c1 = Course("calc2", 5, 'A', "M.Hubbard");
+       Course c2 = Course("calc3", 5, 'A', "M.Hubbard");
+       vector<Course> v1 = {c1, c2};
+       Student s1 = Student(1, "rsmith", "Robert Smith", "password1", "student", v1);
+
+       studentRoster.push_back(s1);
+       /*s1.showOptions();
+       cout << endl;
+       s1.printReport();
+       cout << endl;*/
 
 
-    cout << "\n\nFaculty Roster:\n" <<endl;
-    for(Faculty f: this->facultyRoster)
-    {
-        cout << f.getName() << endl;
-        f.showOptions();
-    }
+       Faculty f1 = Faculty(2, "pjohnson", "Patricia Johnson", "password2", "faculty", v1);
+       //f1.showOptions();
+       cout << endl;
 
-    cout << "\n\nStaff Roster:\n" <<endl;
-    for(Staff st: this->staffRoster)
-    {
-        cout << st.getName() << endl;
-        st.showOptions();
-    }
+       //this->printStudentRoster();
+       f1.editGrades(studentRoster);
+
+
+
 
     cout << "\n\n"
          << "Test Over"

@@ -3,7 +3,7 @@
 class Staff : public User
 {
 private:
-    
+
 
 public:
     Staff() {}

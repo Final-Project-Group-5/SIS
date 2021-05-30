@@ -35,7 +35,7 @@ void User::showOptions()
     for(string option: this->optionsList){
             cout << option << endl;
         };
-    
+
 }
 
 string User::getName()
