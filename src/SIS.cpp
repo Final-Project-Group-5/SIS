@@ -20,7 +20,7 @@ public:
     void test();
 
 private:
-    static auto currentUser;
+    //static auto currentUser;
     vector<Course> availableCourses;
     vector<Course> allCourses;
     vector<Student> studentRoster;
@@ -90,7 +90,7 @@ void SIS::loadData()
         else if (tempUserRole == "faculty")
         {
             Faculty tempFaculty = Faculty(tempID, tempUserName, tempUserFullName, tempUserPassword, tempUserRole);
-            this->facultyRoster.push_back(tempFaculty); 
+            this->facultyRoster.push_back(tempFaculty);
         }
         else
         {
@@ -148,10 +148,10 @@ void SIS::runREPL()
         {
             REPLRunning = 0;
         }
-        if (count(this->currentUser.commandList.begin(), this->currentUser.commandList.end(), commandCode))
+        /*if (count(this->currentUser.commandList.begin(), this->currentUser.commandList.end(), commandCode))
         {
             // this ->currentUser.runCommand(commandCode);
-        }
+        }*/
         else
         {
             cout << "Input error, please re-enter a valid command";
