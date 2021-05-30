@@ -20,7 +20,7 @@ public:
     void test();
 
 private:
-    // static auto currentUser;
+    static auto currentUser;
     vector<Course> availableCourses;
     vector<Course> allCourses;
     vector<Student> studentRoster;
@@ -112,6 +112,8 @@ void SIS::authenticate()
     cin >> username;
     cout << "Please enter your password: ";
     cin >> password;
+    //  Search through our list of users in memory. Once we find the right user and confirmatching password, assign this object that we are looking at to the current user
+
     cout << username << " " << password << endl;
 }
 
@@ -146,14 +148,14 @@ void SIS::runREPL()
         {
             REPLRunning = 0;
         }
-        // if (count(this->currentUser.commandList.begin(), this->currentUser.commandList.end(), commandCode))
-        // {
-        //     // this ->currentUser.runCommand(commandCode);
-        // }
-        // else
-        // {
-        //     cout << "Input error, please re-enter a valid command";
-        // }
+        if (count(this->currentUser.commandList.begin(), this->currentUser.commandList.end(), commandCode))
+        {
+            // this ->currentUser.runCommand(commandCode);
+        }
+        else
+        {
+            cout << "Input error, please re-enter a valid command";
+        }
     };
 }
 void SIS::run()
@@ -177,6 +179,7 @@ void SIS::test()
     for(Student s: this->studentRoster)
     {
         cout << s.getName() << endl;
+        s.showOptions();
     }
 
 
@@ -184,12 +187,14 @@ void SIS::test()
     for(Faculty f: this->facultyRoster)
     {
         cout << f.getName() << endl;
+        f.showOptions();
     }
 
     cout << "\n\nStaff Roster:\n" <<endl;
     for(Staff st: this->staffRoster)
     {
         cout << st.getName() << endl;
+        st.showOptions();
     }
 
     cout << "\n\n"
