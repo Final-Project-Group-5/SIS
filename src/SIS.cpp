@@ -18,6 +18,7 @@ public:
     void exit();
     void runREPL();
     void test();
+    friend void Student::registerForCourse(SIS& x); // Friend function with Student
 
 private:
     // static auto currentUser;
@@ -103,6 +104,26 @@ void SIS::loadData()
     cout << "System data loaded" << endl;
     // cout << full;
 }
+
+void Student::registerForCourse(SIS& x) 
+{
+    string courseCode;
+    cout << "Here are the avalible courses to take this semester: " << endl;
+    // We must populate avalibleCourses vector
+    for (Course course : this->courses)     // shows list of courses
+    {
+        course.printReport();
+    }
+    cout << "Please enter in the course code you wish to registar for: ";
+    getline(cin, courseCode);
+    cout << "You entered: " << courseCode << endl;
+    if (find(availableCourses.begin(), availableCourses.end(), courseCode) != availableCourses.end())   // Find course entered in avalibleCourses
+        // If found, add course to student course vector
+    cout << "Course " << courseCode << " added";
+    else
+    cout << "Course not found.";   // Course not found
+}
+/*
 void SIS::authenticate()
 {
     cout << "Login" << endl;
@@ -113,10 +134,16 @@ void SIS::authenticate()
     cout << "Please enter your password: ";
     cin >> password;
     
-    //  Search through our list of users in memory. Once we find the right user and confirmatching password, assign this object that we are looking at to the current user
+        //  Search through our list of users in memory. Once we find the right user and confirmatching password, assign this object that we are looking at to the current user
 
-    cout << username << " " << password << endl;
+    if (find(argVector.begin(), argVector.end(), username) != argVector.end())   // Find username loaded from argVector
+        if (find(argVector.begin(), argVector.end(), password) != argVector.end())  // Find password loaded from argVector
+            // Assign to currentUser
+            cout << "User |" << username << "|, with password |" << password << "| found.";
+    else
+        cout << "User not found.";   // User not found
 }
+*/
 
 void SIS::saveData()
 {

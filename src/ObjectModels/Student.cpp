@@ -15,7 +15,7 @@ public:
     Student(int, string, string, string, string, vector<Course>);
 
     void printReport();              // Prints current courses
-    friend void registerForCourse(); // Friend of SIS
+    void registerForCourse(SIS&); // Friend of SIS
 };
 
 Student::Student(int id, string username, string name, string pass, string userRole, vector<Course> classList = {})
@@ -44,6 +44,9 @@ void Student::printReport()
     }
 }
 
+/*                           *Moved to SIS obj*
+            To run, type this in main: Student.registerForCourse(_);
+
 void registerForCourse()
 {
     string courseCode;
@@ -56,3 +59,4 @@ void registerForCourse()
     // add course to student course vector
     // if course not avalible send fail
 }
+*/
