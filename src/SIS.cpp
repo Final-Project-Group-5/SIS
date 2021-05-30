@@ -21,12 +21,13 @@ public:
     vector<Student> getStudentRoster();
 
 private:
-    //static auto currentUser;
+    // auto currentUser = authenticate();
     vector<Course> availableCourses;
     vector<Course> allCourses;
     vector<Student> studentRoster;
     vector<Faculty> facultyRoster;
     vector<Staff> staffRoster;
+    // vector<auto> allUsers;
 };
 
 SIS::SIS()
@@ -35,7 +36,7 @@ SIS::SIS()
 
 void SIS::loadData()
 {
-    ofstream outFile;
+    // ofstream outFile;
     ifstream inFile;
     string line;
 
@@ -165,9 +166,9 @@ void SIS::run()
     cout << "Welcome to SIS." << endl;
     this->loadData();
     this->test();
-    //this->authenticate();
+    this->authenticate();
     // this->currentUser.printOptions()
-    //this->runREPL();
+    this->runREPL();
     this->exit();
 };
 
@@ -176,29 +177,26 @@ void SIS::test()
     cout << setfill(' ') << setw(25) << "This is a test\n\n"
          << endl;
 
-       User user1 = User(1, "rsmith", "Robert Smith", "password1", "staff");
-       //user1.showOptions();
-       Course c1 = Course("calc2", 5, 'A', "M.Hubbard");
-       Course c2 = Course("calc3", 5, 'A', "M.Hubbard");
-       vector<Course> v1 = {c1, c2};
-       Student s1 = Student(1, "rsmith", "Robert Smith", "password1", "student", v1);
+    User user1 = User(1, "rsmith", "Robert Smith", "password1", "staff");
+    //user1.showOptions();
+    Course c1 = Course("calc2", 5, 'A', "M.Hubbard");
+    Course c2 = Course("calc3", 5, 'A', "M.Hubbard");
+    vector<Course> v1 = {c1, c2};
+    Student s1 = Student(1, "rsmith", "Robert Smith", "password1", "student", v1);
+    Student s2 = Student(2, "rsmith", "Omar Salah", "password1", "student", v1);
+    Student s3 = Student(3, "rsmith", "Justin Kang", "password1", "student", v1);
 
-       studentRoster.push_back(s1);
-       /*s1.showOptions();
-       cout << endl;
-       s1.printReport();
-       cout << endl;*/
+    studentRoster.push_back(s1);
+    studentRoster.push_back(s2);
+    studentRoster.push_back(s3);
 
+    Faculty f1 = Faculty(2, "pjohnson", "Patricia Johnson", "password2", "faculty", v1);
+    //f1.showOptions();
+    cout << endl;
 
-       Faculty f1 = Faculty(2, "pjohnson", "Patricia Johnson", "password2", "faculty", v1);
-       //f1.showOptions();
-       cout << endl;
-
-       //this->printStudentRoster();
-       f1.editGrades(studentRoster);
-
-
-
+    //this->printStudentRoster();
+    f1.editGrades(studentRoster);
+    s3.printReport();
 
     cout << "\n\n"
          << "Test Over"

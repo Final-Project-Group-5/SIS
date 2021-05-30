@@ -31,7 +31,8 @@ Faculty::Faculty(int id, string username, string name, string pass, string userR
 
 void Faculty::listClasses()
 {
-    cout << "This is the list of courses you are instructing: " << endl;
+    cout << "This is the list of courses you are instructing: \n\n"
+         << endl;
     for (Course course : this->courses)
     {
         course.printReportFaculty();
@@ -40,30 +41,56 @@ void Faculty::listClasses()
 
 void Faculty::editGrades(vector<Student> studentRoster)
 {
-    string c, student;
+    string courseCode;
+    int studentID;
+    char letterGrade;
     vector<Student> tempRoster = {};
+
     this->listClasses();
-    cout << "\nPlease enter the course code of the class in which the students whos grade you would like to modify is enrolled" << endl;
-    cin >> c;
+    cout << endl;
+    cout << "\nPlease select the course in which the student whos grade you would like to modify is enrolled: ";
+    cin >> courseCode;
+    cout << endl;
 
     // Here we need to figure out how to read from the SIS.studentsRoster follow the code below
 
-    for (Student student: studentRoster)
+    for (Student student : studentRoster)
     {
-      for (Course course: student.getClassList())
-      {
-        if(c == course.getCourseCode()) //try to find a match from the input
+        for (Course course : student.getClassList())
         {
-          tempRoster.push_back(student);
-          cout << "test" << endl;
+            if (courseCode == course.getCourseCode()) //try to find a match from the input
+            {
+                tempRoster.push_back(student);
+            }
+            continue;
         }
-        else
-          continue;        //for testing purposes | delete else if it works
-      }
     }
 
-
-
+    cout << courseCode << " Student Roster" << endl;
+    for (Student s : tempRoster)
+    {
+        cout << s.getName() << " " << s.getUserID() << endl;
+    }
+    cout << "\nPlease Select the student ID number of with the grade you would like to modify: ";
+    cin >> studentID;
+    cout << endl;
+    for (Student s : tempRoster)
+    {
+        if (studentID == s.getUserID())
+        {
+            for (Course course : s.getClassList())
+            {
+                if (courseCode == course.getCourseCode()) //try to find a match from the input
+                {
+                    course.printReport();
+                    cout << "Please enter the Letter grade that you would like to give this student: ";
+                    cin >> letterGrade;
+                    course.setGrade(letterGrade);
+                    course.printReport();
+                }
+            }
+        }
+    }
 
     /*
     for(Student student: SIS.studentRoster){

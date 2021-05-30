@@ -17,6 +17,7 @@ public:
     string getInstructor();
     int getCredits();
     int getGPV();
+    void setGrade(char);
 
 private:
     string courseCode,
@@ -80,4 +81,8 @@ void Course::printReport()
 void Course::printReportFaculty()
 {
     cout << courseCode << endl;
+}
+void Course::setGrade(char grade)
+{
+    letterGrade = toupper(grade);
 };
