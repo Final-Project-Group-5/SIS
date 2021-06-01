@@ -18,16 +18,14 @@ public:
     void exit();
     void runREPL();
     void test();
-    vector<Student> getStudentRoster();
 
 private:
-    // auto currentUser = authenticate();
+    // static auto currentUser;
     vector<Course> availableCourses;
     vector<Course> allCourses;
     vector<Student> studentRoster;
     vector<Faculty> facultyRoster;
     vector<Staff> staffRoster;
-    // vector<auto> allUsers;
 };
 
 SIS::SIS()
@@ -36,7 +34,7 @@ SIS::SIS()
 
 void SIS::loadData()
 {
-    // ofstream outFile;
+    ofstream outFile;
     ifstream inFile;
     string line;
 
@@ -54,7 +52,7 @@ void SIS::loadData()
 
     while (getline(inFile, line))
     {
-        // cout << line << endl;
+        cout << line << endl;
         stringstream s_stream(line); //create string stream from the string
 
         vector<string> argVector;
@@ -81,7 +79,7 @@ void SIS::loadData()
 
         // for (string arg : argVector)
         // {
-        //     cout << arg << endl;
+        //    cout << arg << endl;
         // };
 
         if (tempUserRole == "student")
@@ -92,7 +90,7 @@ void SIS::loadData()
         else if (tempUserRole == "faculty")
         {
             Faculty tempFaculty = Faculty(tempID, tempUserName, tempUserFullName, tempUserPassword, tempUserRole);
-            this->facultyRoster.push_back(tempFaculty);
+            this->facultyRoster.push_back(tempFaculty); 
         }
         else
         {
@@ -105,6 +103,7 @@ void SIS::loadData()
     cout << "System data loaded" << endl;
     // cout << full;
 }
+
 void SIS::authenticate()
 {
     cout << "Login" << endl;
@@ -114,9 +113,55 @@ void SIS::authenticate()
     cin >> username;
     cout << "Please enter your password: ";
     cin >> password;
-    //  Search through our list of users in memory. Once we find the right user and confirmatching password, assign this object that we are looking at to the current user
+    
+    for (Staff s : staffRoster)
+    {
+        if (s.getUserName() == username)
+        {
+            if (s.getPass() == password)
+            {
+                cout << "Login successful." << endl;
+            }
+            else
+            {
+                cout << "Failed to authenticate" << endl;
+            }
+            
+        }
+        
+    }
+    for (Faculty f : facultyRoster)
+    {
+        if (f.getUserName() == username)
+        {
+            if (f.getPass() == password)
+            {
+                cout << "Login successful." << endl;
+            }
+            else
+            {
+                cout << "Failed to authenticate" << endl;
+            }
+        }
+        
+    }
+    for (Student s : studentRoster)
+    {
+        if (s.getUserName() == username)
+        {
+            if (s.getPass() == password)
+            {
+                cout << "Login successful." << endl;
+            }
+            else
+            {
+                cout << "Failed to authenticate" << endl;
+            }
+        }
+        
+    }
+    
 
-    cout << username << " " << password << endl;
 }
 
 void SIS::saveData()
@@ -150,14 +195,14 @@ void SIS::runREPL()
         {
             REPLRunning = 0;
         }
-        /*if (count(this->currentUser.commandList.begin(), this->currentUser.commandList.end(), commandCode))
-        {
-            // this ->currentUser.runCommand(commandCode);
-        }*/
-        else
-        {
-            cout << "Input error, please re-enter a valid command";
-        }
+        // if (count(this->currentUser.commandList.begin(), this->currentUser.commandList.end(), commandCode))
+        // {
+        //     // this ->currentUser.runCommand(commandCode);
+        // }
+        // else
+        // {
+        //     cout << "Input error, please re-enter a valid command";
+        // }
     };
 }
 void SIS::run()
@@ -174,6 +219,9 @@ void SIS::run()
 
 void SIS::test()
 {
+    cout << setfill(' ') << setw(25) << "This is a test\n\n"
+         << endl;
+
     cout << setfill(' ') << setw(25) << "This is a test\n\n"
          << endl;
 
@@ -216,3 +264,4 @@ void SIS::exit()
     }
     cout << "Thank you for using SIS." << endl;
 };
+

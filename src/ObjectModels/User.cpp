@@ -4,14 +4,15 @@
 
 using namespace std;
 
-class User
-{
+class User{
 public:
-    User() {}
+    User(){}
     User(int, string, string, string, string);
     string getName();
-    void showName();
+    string getUserName();
+    string getPass();
     void showID();
+    void showName();
     int getUserID();
     void showOptions();
 
@@ -24,8 +25,7 @@ protected:
     vector<string> optionsList;
 };
 
-User::User(int id, string username, string name, string pass, string userRole)
-{
+User::User(int id, string username, string name, string pass, string userRole){
     userID = id;
     userName = username;
     fullName = name;
@@ -35,10 +35,10 @@ User::User(int id, string username, string name, string pass, string userRole)
 
 void User::showOptions()
 {
-    for (string option : this->optionsList)
-    {
-        cout << option << endl;
-    };
+    for(string option: this->optionsList){
+            cout << option << endl;
+        };
+    
 }
 
 string User::getName()
@@ -51,12 +51,24 @@ void User::showName()
     cout << fullName << endl;
 }
 
-void User::showID()
+
+string User::getUserName()
 {
-    cout << userID << endl;
+    return userName;
+}
+
+string User::getPass()
+{
+    return password;
+}
+
+void User::showName()
+{
+    cout << fullName << endl;
 }
 
 int User::getUserID()
 {
     return userID;
 }
+
