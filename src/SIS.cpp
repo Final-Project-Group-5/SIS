@@ -52,7 +52,7 @@ void SIS::loadData()
 
     while (getline(inFile, line))
     {
-        // cout << line << endl;
+        cout << line << endl;
         stringstream s_stream(line); //create string stream from the string
 
         vector<string> argVector;
@@ -79,7 +79,7 @@ void SIS::loadData()
 
         // for (string arg : argVector)
         // {
-        //     cout << arg << endl;
+        //    cout << arg << endl;
         // };
 
         if (tempUserRole == "student")
@@ -103,6 +103,7 @@ void SIS::loadData()
     cout << "System data loaded" << endl;
     // cout << full;
 }
+
 void SIS::authenticate()
 {
     cout << "Login" << endl;
@@ -113,9 +114,80 @@ void SIS::authenticate()
     cout << "Please enter your password: ";
     cin >> password;
     
+    for (Staff s : staffRoster)
+    {
+        if (s.getUserName() == username)
+        {
+            if (s.getPass() == password)
+            {
+                cout << "Login successful." << endl;
+            }
+            else
+            {
+                cout << "Failed to authenticate" << endl;
+            }
+            
+        }
+        
+    }
+    for (Faculty f : facultyRoster)
+    {
+        if (f.getUserName() == username)
+        {
+            if (f.getPass() == password)
+            {
+                cout << "Login successful." << endl;
+            }
+            else
+            {
+                cout << "Failed to authenticate" << endl;
+            }
+        }
+        
+    }
+    for (Student s : studentRoster)
+    {
+        if (s.getUserName() == username)
+        {
+            if (s.getPass() == password)
+            {
+                cout << "Login successful." << endl;
+            }
+            else
+            {
+                cout << "Failed to authenticate" << endl;
+            }
+        }
+        
+    }
+    
     //  Search through our list of users in memory. Once we find the right user and confirmatching password, assign this object that we are looking at to the current user
 
-    cout << username << " " << password << endl;
+
+
+
+/*
+    if (find(argVector.begin(), argVector.end(), username) != argVector.end()) // Find username loaded from argVector
+    {  
+        int userIndex = find(argVector.begin(), argVector.end(), username) - argVector.begin(); // Finds index of username
+        if (find(argVector.begin(), argVector.end(), password) != argVector.end())  // Find password loaded from argVector
+        {
+            int passIndex = find(argVector.begin(), argVector.end(), password) - argVector.begin(); // Finds index of password
+            // cout << userIndex << " " << passIndex << endl;
+            if ((passIndex - userIndex) == 2)   // Checks if username and password are part of the same user
+            {
+                 // Assign to currentUser
+                cout << "User |" << username << "|, with password |" << password << "| found." << endl;
+                return true;
+            }
+        }
+    }
+    else
+    {
+         cout << "User not found." << endl;   // User not found
+        return false;
+    }
+    */
 }
 
 void SIS::saveData()
@@ -176,7 +248,7 @@ void SIS::test()
     cout << setfill(' ') << setw(25) << "This is a test\n\n"
          << endl;
 
-    
+    cout << "rawr28" << endl;
 
     cout << "\n\n"
          << "Test Over"

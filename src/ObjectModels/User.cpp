@@ -9,6 +9,8 @@ public:
     User(){}
     User(int, string, string, string, string);
     string getName();
+    string getUserName();
+    string getPass();
     void showName();
     int getUserID();
     void showOptions();
@@ -41,6 +43,16 @@ void User::showOptions()
 string User::getName()
 {
     return fullName;
+}
+
+string User::getUserName()
+{
+    return userName;
+}
+
+string User::getPass()
+{
+    return password;
 }
 
 void User::showName()
