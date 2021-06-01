@@ -13,9 +13,11 @@ public:
     Course(string, int, char, string);
     string getCourseCode();
     void printReport();
+    void printReportFaculty();
     string getInstructor();
     int getCredits();
     int getGPV();
+    void setGrade(char);
 
 private:
     string courseCode,
@@ -74,4 +76,13 @@ int Course::getGPV()
 void Course::printReport()
 {
     cout << courseCode << setw(15) << instructor << setw(15) << to_string(credits) << setw(15) << letterGrade << setw(5) << to_string(gpv) << endl;
+}
+
+void Course::printReportFaculty()
+{
+    cout << courseCode << endl;
+}
+void Course::setGrade(char grade)
+{
+    letterGrade = toupper(grade);
 };

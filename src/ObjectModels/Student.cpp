@@ -13,6 +13,11 @@ private:
 public:
     Student() {}
     Student(int, string, string, string, string, vector<Course>);
+    int getId();
+    string getUsername();
+    string getPass();
+    vector<Course> getClassList();
+    string getName();
 
     void printReport();              // Prints current courses
     friend void registerForCourse(); // Friend of SIS
@@ -42,6 +47,26 @@ void Student::printReport()
     {
         course.printReport();
     }
+}
+
+int Student::getId(){
+  return userID;
+}
+
+string Student::getUsername(){
+  return userName;
+}
+
+string Student::getPass(){
+  return password;
+}
+
+vector<Course> Student::getClassList(){
+  return courses;
+}
+
+string Student::getName(){
+  return fullName;
 }
 
 void registerForCourse()

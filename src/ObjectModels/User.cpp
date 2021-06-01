@@ -11,6 +11,7 @@ public:
     string getName();
     string getUserName();
     string getPass();
+    void showID();
     void showName();
     int getUserID();
     void showOptions();
@@ -45,6 +46,12 @@ string User::getName()
     return fullName;
 }
 
+void User::showName()
+{
+    cout << fullName << endl;
+}
+
+
 string User::getUserName()
 {
     return userName;
@@ -64,3 +71,4 @@ int User::getUserID()
 {
     return userID;
 }
+

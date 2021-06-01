@@ -161,33 +161,7 @@ void SIS::authenticate()
         
     }
     
-    //  Search through our list of users in memory. Once we find the right user and confirmatching password, assign this object that we are looking at to the current user
 
-
-
-
-/*
-    if (find(argVector.begin(), argVector.end(), username) != argVector.end()) // Find username loaded from argVector
-    {  
-        int userIndex = find(argVector.begin(), argVector.end(), username) - argVector.begin(); // Finds index of username
-        if (find(argVector.begin(), argVector.end(), password) != argVector.end())  // Find password loaded from argVector
-        {
-            int passIndex = find(argVector.begin(), argVector.end(), password) - argVector.begin(); // Finds index of password
-            // cout << userIndex << " " << passIndex << endl;
-            if ((passIndex - userIndex) == 2)   // Checks if username and password are part of the same user
-            {
-                 // Assign to currentUser
-                cout << "User |" << username << "|, with password |" << password << "| found." << endl;
-                return true;
-            }
-        }
-    }
-    else
-    {
-         cout << "User not found." << endl;   // User not found
-        return false;
-    }
-    */
 }
 
 void SIS::saveData()
@@ -248,7 +222,29 @@ void SIS::test()
     cout << setfill(' ') << setw(25) << "This is a test\n\n"
          << endl;
 
-    cout << "rawr28" << endl;
+    cout << setfill(' ') << setw(25) << "This is a test\n\n"
+         << endl;
+
+    User user1 = User(1, "rsmith", "Robert Smith", "password1", "staff");
+    //user1.showOptions();
+    Course c1 = Course("calc2", 5, 'A', "M.Hubbard");
+    Course c2 = Course("calc3", 5, 'A', "M.Hubbard");
+    vector<Course> v1 = {c1, c2};
+    Student s1 = Student(1, "rsmith", "Robert Smith", "password1", "student", v1);
+    Student s2 = Student(2, "rsmith", "Omar Salah", "password1", "student", v1);
+    Student s3 = Student(3, "rsmith", "Justin Kang", "password1", "student", v1);
+
+    studentRoster.push_back(s1);
+    studentRoster.push_back(s2);
+    studentRoster.push_back(s3);
+
+    Faculty f1 = Faculty(2, "pjohnson", "Patricia Johnson", "password2", "faculty", v1);
+    //f1.showOptions();
+    cout << endl;
+
+    //this->printStudentRoster();
+    f1.editGrades(studentRoster);
+    s3.printReport();
 
     cout << "\n\n"
          << "Test Over"
@@ -268,3 +264,4 @@ void SIS::exit()
     }
     cout << "Thank you for using SIS." << endl;
 };
+
