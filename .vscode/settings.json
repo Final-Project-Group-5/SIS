@@ -4,6 +4,7 @@
   "files.associations": {
     "iomanip": "cpp",
     "iostream": "cpp",
-    "xstring": "cpp"
+    "xstring": "cpp",
+    "vector": "cpp"
   }
 }

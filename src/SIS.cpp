@@ -90,7 +90,7 @@ void SIS::loadData()
         else if (tempUserRole == "faculty")
         {
             Faculty tempFaculty = Faculty(tempID, tempUserName, tempUserFullName, tempUserPassword, tempUserRole);
-            this->facultyRoster.push_back(tempFaculty); 
+            this->facultyRoster.push_back(tempFaculty);
         }
         else
         {
@@ -113,7 +113,7 @@ void SIS::authenticate()
     cin >> username;
     cout << "Please enter your password: ";
     cin >> password;
-    
+
     for (Staff s : staffRoster)
     {
         if (s.getUserName() == username)
@@ -126,9 +126,7 @@ void SIS::authenticate()
             {
                 cout << "Failed to authenticate" << endl;
             }
-            
         }
-        
     }
     for (Faculty f : facultyRoster)
     {
@@ -143,7 +141,6 @@ void SIS::authenticate()
                 cout << "Failed to authenticate" << endl;
             }
         }
-        
     }
     for (Student s : studentRoster)
     {
@@ -158,10 +155,7 @@ void SIS::authenticate()
                 cout << "Failed to authenticate" << endl;
             }
         }
-        
     }
-    
-
 }
 
 void SIS::saveData()
@@ -264,4 +258,3 @@ void SIS::exit()
     }
     cout << "Thank you for using SIS." << endl;
 };
-
