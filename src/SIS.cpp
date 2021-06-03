@@ -107,69 +107,68 @@ void SIS::loadData()
 void SIS::authenticate()
 {
     int pass = 1;
-    while (pass == 1 || pass == 3)
-    {
-        cout << "Login" << endl;
+    bool userFound = 0;
+    cout << "Login" << endl;
+
+    while(!userFound){
         string username = "";
         string password = "";
-        cout << "Please enter your username: ";
-        cin >> username;
-        cout << "Please enter your password: ";
-        cin >> password;
 
-        for (Staff s : staffRoster)
-        {
-            if (s.getUserName() == username)
-            {
-                if (s.getPass() == password)
+        cout << "\nPlease enter your username: ";
+        cin >> username;
+       
+        for (Staff s: staffRoster)
+            {   
+                if (s.getUserName() == username)
                 {
-                    cout << "Login successful." << endl;
-                    pass = 2;
-                }
-                else
-                {
-                    cout << "Failed to authenticate" << endl;
-                    pass = 3;
-                }
-            }
-        }
-        for (Faculty f : facultyRoster)
-        {
-            if (f.getUserName() == username)
-            {
-                if (f.getPass() == password)
-                {
-                    cout << "Login successful." << endl;
-                    pass = 2;
-                }
-                else
-                {
-                    cout << "Failed to authenticate" << endl;
-                    pass = 3;
+                    cout << "User Found." << endl;
+                    userFound = 1;
+                    cout << "Please enter your password: ";
+                    cin >> password;
+                    while(password != s.getPass()){
+                        cout << "Sorry that password was incorrect, please re-enter the password: ";
+                        cin >> password;
+                    }
+                    cout << "Login Successful!" << endl;
+                    continue;
                 }
             }
-        }
-        for (Student s : studentRoster)
-        {
-            if (s.getUserName() == username)
-            {
-                if (s.getPass() == password)
+        for (Faculty f: facultyRoster)
+            {   
+                if (f.getUserName() == username)
                 {
-                    cout << "Login successful." << endl;
-                    pass = 2;
-                }
-                else
-                {
-                    cout << "Failed to authenticate" << endl;
-                    pass = 3;
+                    cout << "User .ound." << endl;
+                    userFound = 1;
+                    cout << "Please enter your password: ";
+                    cin >> password;
+                    while(password != f.getPass()){
+                        cout << "Sorry that password was incorrect, please re-enter the password: ";
+                        cin >> password;
+                    }
+                    cout << "Login Successful!" << endl;
+                    continue;
                 }
             }
-        }
-        if (pass == 1)
-        {
-            cout << "Failed to authenticate" << endl;
-        }
+        for (Student s: studentRoster)
+            {
+                if (s.getUserName() == username)
+                {
+                    cout << "User Found." << endl;
+                    userFound = 1;
+                    cout << "Please enter your password: ";
+                    cin >> password;
+                    while(password != s.getPass()){
+                        cout << "Sorry that password was incorrect, please re-enter the password: ";
+                        cin >> password;
+                    }
+                    cout << "Login Successful!" << endl;
+                    continue;
+                
+                }
+            }
+            if(!userFound) cout << "No user with that username was found please re-enter your username." << endl;         
     }
+   
 }
 
 void SIS::saveData()
