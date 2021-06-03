@@ -20,7 +20,7 @@ public:
     void test();
 
 private:
-    // static auto currentUser;
+    // auto needs to be initialized at the time of declaration
     vector<Course> availableCourses;
     vector<Course> allCourses;
     vector<Student> studentRoster;
@@ -106,56 +106,69 @@ void SIS::loadData()
 
 void SIS::authenticate()
 {
+    int pass = 1;
+    bool userFound = 0;
     cout << "Login" << endl;
-    string username = "";
-    string password = "";
-    cout << "Please enter your username: ";
-    cin >> username;
-    cout << "Please enter your password: ";
-    cin >> password;
 
-    for (Staff s : staffRoster)
-    {
-        if (s.getUserName() == username)
-        {
-            if (s.getPass() == password)
-            {
-                cout << "Login successful." << endl;
+    while(!userFound){
+        string username = "";
+        string password = "";
+
+        cout << "\nPlease enter your username: ";
+        cin >> username;
+       
+        for (Staff s: staffRoster)
+            {   
+                if (s.getUserName() == username)
+                {
+                    cout << "User Found." << endl;
+                    userFound = 1;
+                    cout << "Please enter your password: ";
+                    cin >> password;
+                    while(password != s.getPass()){
+                        cout << "Sorry that password was incorrect, please re-enter the password: ";
+                        cin >> password;
+                    }
+                    cout << "Login Successful!" << endl;
+                    continue;
+                }
             }
-            else
-            {
-                cout << "Failed to authenticate" << endl;
+        for (Faculty f: facultyRoster)
+            {   
+                if (f.getUserName() == username)
+                {
+                    cout << "User .ound." << endl;
+                    userFound = 1;
+                    cout << "Please enter your password: ";
+                    cin >> password;
+                    while(password != f.getPass()){
+                        cout << "Sorry that password was incorrect, please re-enter the password: ";
+                        cin >> password;
+                    }
+                    cout << "Login Successful!" << endl;
+                    continue;
+                }
             }
-        }
+        for (Student s: studentRoster)
+            {
+                if (s.getUserName() == username)
+                {
+                    cout << "User Found." << endl;
+                    userFound = 1;
+                    cout << "Please enter your password: ";
+                    cin >> password;
+                    while(password != s.getPass()){
+                        cout << "Sorry that password was incorrect, please re-enter the password: ";
+                        cin >> password;
+                    }
+                    cout << "Login Successful!" << endl;
+                    continue;
+                
+                }
+            }
+            if(!userFound) cout << "No user with that username was found please re-enter your username." << endl;         
     }
-    for (Faculty f : facultyRoster)
-    {
-        if (f.getUserName() == username)
-        {
-            if (f.getPass() == password)
-            {
-                cout << "Login successful." << endl;
-            }
-            else
-            {
-                cout << "Failed to authenticate" << endl;
-            }
-        }
-    }
-    for (Student s : studentRoster)
-    {
-        if (s.getUserName() == username)
-        {
-            if (s.getPass() == password)
-            {
-                cout << "Login successful." << endl;
-            }
-            else
-            {
-                cout << "Failed to authenticate" << endl;
-            }
-        }
-    }
+   
 }
 
 void SIS::saveData()
@@ -215,30 +228,6 @@ void SIS::test()
 {
     cout << setfill(' ') << setw(25) << "This is a test\n\n"
          << endl;
-
-    cout << setfill(' ') << setw(25) << "This is a test\n\n"
-         << endl;
-
-    User user1 = User(1, "rsmith", "Robert Smith", "password1", "staff");
-    //user1.showOptions();
-    Course c1 = Course("calc2", 5, 'A', "M.Hubbard");
-    Course c2 = Course("calc3", 5, 'A', "M.Hubbard");
-    vector<Course> v1 = {c1, c2};
-    Student s1 = Student(1, "rsmith", "Robert Smith", "password1", "student", v1);
-    Student s2 = Student(2, "rsmith", "Omar Salah", "password1", "student", v1);
-    Student s3 = Student(3, "rsmith", "Justin Kang", "password1", "student", v1);
-
-    studentRoster.push_back(s1);
-    studentRoster.push_back(s2);
-    studentRoster.push_back(s3);
-
-    Faculty f1 = Faculty(2, "pjohnson", "Patricia Johnson", "password2", "faculty", v1);
-    //f1.showOptions();
-    cout << endl;
-
-    //this->printStudentRoster();
-    f1.editGrades(studentRoster);
-    s3.printReport();
 
     cout << "\n\n"
          << "Test Over"
