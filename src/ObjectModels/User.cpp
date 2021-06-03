@@ -12,6 +12,7 @@ public:
     string getName();
     string getUserName();
     string getPass();
+    string getRole();
     void showID();
     void showName();
     int getUserID();
@@ -66,4 +67,9 @@ string User::getPass()
 int User::getUserID()
 {
     return userID;
+}
+
+string User::getRole()
+{
+    return role;
 }

@@ -18,7 +18,10 @@ public:
     void exit();
     void runREPL();
     void test();
-
+    Faculty currentUserFa;
+    Student currentUserSu;
+    Staff currentUserSa;
+    SIS *userPointer;
 private:
     // auto needs to be initialized at the time of declaration
     vector<Course> availableCourses;
@@ -141,6 +144,8 @@ void SIS::authenticate()
                         cin >> password;
                     }
                     cout << "Login Successful!" << endl;
+                    Faculty *currentUserFa = new Faculty(f.getUserID(), f.getUserName(), f.getName(), f.getPass(), f.getRole());
+                    userPointer = currentUserFa;
                     continue;
                 }
             }
@@ -211,9 +216,8 @@ void SIS::run()
 
     cout << "Welcome to SIS." << endl;
     this->loadData();
-    this->test();
     this->authenticate();
-    // this->currentUser.printOptions()
+    this->test();
     this->runREPL();
     this->exit();
 };
@@ -222,6 +226,28 @@ void SIS::test()
 {
     cout << setfill(' ') << setw(25) << "This is a test\n\n"
          << endl;
+
+ User user1 = User(1, "rsmith", "Robert Smith", "password1", "staff");
+    //user1.showOptions();
+    Course c1 = Course("calc2", 5, 'A', "M.Hubbard");
+    Course c2 = Course("calc3", 5, 'A', "M.Hubbard");
+    vector<Course> v1 = {c1, c2};
+    Student s1 = Student(1, "rsmith", "Robert Smith", "password1", "student", v1);
+    Student s2 = Student(2, "rsmith", "Omar Salah", "password1", "student", v1);
+    Student s3 = Student(3, "rsmith", "Justin Kang", "password1", "student", v1);
+
+    studentRoster.push_back(s1);
+    studentRoster.push_back(s2);
+    studentRoster.push_back(s3);
+
+    this->userPointer = Faculty(2, "pjohnson", "Patricia Johnson", "password2", "faculty", v1);
+    cout << endl;
+
+    //this->printStudentRoster();
+    userPointer.editGrades(studentRoster);
+    s3.printReport();
+
+    this->userPointer.showOptions();
 
     cout << "\n\n"
          << "Test Over"
