@@ -52,7 +52,7 @@ void SIS::loadData()
 
     while (getline(inFile, line))
     {
-        cout << line << endl;
+        // cout << line << endl;
         stringstream s_stream(line); //create string stream from the string
 
         vector<string> argVector;
@@ -62,7 +62,8 @@ void SIS::loadData()
         string tempUserName,
             tempUserFullName,
             tempUserPassword,
-            tempUserRole;
+            tempUserRole,
+            tempCourseVStr;
 
         while (s_stream.good())
         {
@@ -76,6 +77,8 @@ void SIS::loadData()
         tempUserFullName = argVector[2];
         tempUserPassword = argVector[3];
         tempUserRole = argVector[4];
+        
+        // cout << argVector[5] << endl;
 
         // for (string arg : argVector)
         // {
@@ -106,7 +109,6 @@ void SIS::loadData()
 
 void SIS::authenticate()
 {
-    int pass = 1;
     bool userFound = 0;
     cout << "Login" << endl;
 
