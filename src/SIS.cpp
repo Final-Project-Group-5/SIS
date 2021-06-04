@@ -26,9 +26,9 @@ private:
     // auto needs to be initialized at the time of declaration
     vector<Course> availableCourses;
     vector<Course> allCourses;
-    vector<Student> studentRoster;
-    vector<Faculty> facultyRoster;
-    vector<Staff> staffRoster;
+    vector<Student*> studentRoster;
+    vector<Faculty*> facultyRoster;
+    vector<Staff*> staffRoster;
 };
 
 SIS::SIS()
@@ -84,17 +84,17 @@ void SIS::loadData()
 
         if (tempUserRole == "student")
         {
-            Student tempStudent = Student(tempID, tempUserName, tempUserFullName, tempUserPassword, tempUserRole);
+            Student* tempStudent = new Student(tempID, tempUserName, tempUserFullName, tempUserPassword, tempUserRole);
             this->studentRoster.push_back(tempStudent);
         }
         else if (tempUserRole == "faculty")
         {
-            Faculty tempFaculty = Faculty(tempID, tempUserName, tempUserFullName, tempUserPassword, tempUserRole);
+            Faculty* tempFaculty = new Faculty(tempID, tempUserName, tempUserFullName, tempUserPassword, tempUserRole);
             this->facultyRoster.push_back(tempFaculty);
         }
         else
         {
-            Staff tempStaff = Staff(tempID, tempUserName, tempUserFullName, tempUserPassword, tempUserRole);
+            Staff* tempStaff = new Staff(tempID, tempUserName, tempUserFullName, tempUserPassword, tempUserRole);
             this->staffRoster.push_back(tempStaff);
         };
     };
@@ -116,52 +116,51 @@ void SIS::authenticate()
         cout << "\nPlease enter your username: ";
         cin >> username;
        
-        for (Staff s: staffRoster)
+        for (Staff* s: staffRoster)
             {   
-                if (s.getUserName() == username)
+                if ((*s).getUserName() == username)
                 {
                     userFound = 1;
                     cout << "Please enter your password: ";
                     cin >> password;
-                    while(password != s.getPass()){
+                    while(password != (*s).getPass()){
                         cout << "Sorry that password was incorrect, please re-enter the password: ";
                         cin >> password;
                     }
-                    currentStaff = &s;
+                    currentStaff = s;
                     cout << "Login Successful!" << endl;
                     continue;
                 }
             }
-        for (Faculty f: facultyRoster)
+        for (Faculty* f: facultyRoster)
             {   
-                if (f.getUserName() == username)
+                if ((*f).getUserName() == username)
                 {
-                    cout << "User .ound." << endl;
+                    // cout << "User ound." << endl;
                     userFound = 1;
                     cout << "Please enter your password: ";
                     cin >> password;
-                    while(password != f.getPass()){
+                    while(password != (*f).getPass()){
                         cout << "Sorry that password was incorrect, please re-enter the password: ";
                         cin >> password;
                     }
-                    currentFaculty = &f;
-                    
+                    currentFaculty = f;
                     cout << "Login Successful!" << endl;
                     continue;
                 }
             }
-        for (Student s: studentRoster)
+        for (Student* s: studentRoster)
             {
-                if (s.getUserName() == username)
+                if ((*s).getUserName() == username)
                 {
                     userFound = 1;
                     cout << "Please enter your password: ";
                     cin >> password;
-                    while(password != s.getPass()){
+                    while(password != (*s).getPass()){
                         cout << "Sorry that password was incorrect, please re-enter the password: ";
                         cin >> password;
                     }
-                    currentStudent = &s; 
+                    currentStudent = s; 
                     cout << "Login Successful!" << endl;
                     continue;
                 
@@ -185,15 +184,15 @@ void SIS::saveData()
         std::exit(1);
     };
 
-    for (Staff s: staffRoster)
+    for (Staff* s: staffRoster)
         {   
             outFile << s;;
         }
-    for (Faculty f: facultyRoster)
+    for (Faculty* f: facultyRoster)
         {   
             outFile << f;;
         }
-    for (Student s: studentRoster)
+    for (Student* s: studentRoster)
         {
             outFile << s;
         }
@@ -208,17 +207,17 @@ void SIS::runREPL()
 
     int REPLRunning = 1;
     // this -> currentUser.showOptions();
-    cout << "You can exit the command loop by entering option 0 and show your available options by entering 9." << endl;
+    cout << "\nYou can exit the command loop by entering option 0 and show your available options by entering 9." << endl;
 
-    //  currentFaculty!=NULL
-    //         ? currentFaculty->showOptions()
-    //     : currentStudent !=NULL
-    //         ? currentStudent->showOptions()
-    //     : currentStaff->showOptions();
+     currentFaculty!=NULL
+            ? (*currentFaculty).showOptions()
+        : currentStudent !=NULL
+            ? (*currentStudent).showOptions()
+        : (*currentStaff).showOptions();
     
     while (REPLRunning)
     {   
-        cout << "Please enter a command: ";
+        cout << "\nPlease enter a command: ";
         cin >> commandCode;
         if (commandCode == 0)
         {
@@ -256,7 +255,7 @@ void SIS::test()
 
 void SIS::exit()
 {
-    int trigger;
+    bool trigger=0;
 
     cout << "Would you like to save all of the changes made during this session? (1 = Yes, 0=No): ";
     cin >> trigger;
@@ -264,5 +263,18 @@ void SIS::exit()
     {
         saveData();
     }
+
+    for (Staff* s: staffRoster)
+        {   
+            delete s;
+        }
+    for (Faculty f: facultyRoster)
+        {   
+            delete f;
+        }
+    for (Student s: studentRoster)
+        {
+            delete s;
+        }
     cout << "Thank you for using SIS." << endl;
 };

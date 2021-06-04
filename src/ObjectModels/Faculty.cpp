@@ -15,7 +15,7 @@ public:
     Faculty(int, string, string, string, string, vector<Course>);
 
     void listClasses();
-    void editGrades(vector<Student> studentRoster);
+    void editGrades();
     void runCommandCode(int);
 };
 
@@ -40,68 +40,68 @@ void Faculty::listClasses()
     }
 }
 
-void Faculty::editGrades(vector<Student> studentRoster)
+void Faculty::editGrades()
 {
-    string courseCode;
-    int studentID;
-    char letterGrade;
-    vector<Student> tempRoster = {};
+    // string courseCode;
+    // int studentID;
+    // char letterGrade;
+    // vector<Student> tempRoster = {};
 
-    this->listClasses();
-    cout << endl;
-    cout << "\nPlease select the course in which the student whos grade you would like to modify is enrolled: ";
-    cin >> courseCode;
-    cout << endl;
+    // this->listClasses();
+    // cout << endl;
+    // cout << "\nPlease select the course in which the student whos grade you would like to modify is enrolled: ";
+    // cin >> courseCode;
+    // cout << endl;
 
-    // Here we need to figure out how to read from the SIS.studentsRoster follow the code below
+    // // Here we need to figure out how to read from the SIS.studentsRoster follow the code below
 
-    for (Student student : studentRoster)
-    {
-        for (Course course : student.getClassList())
-        {
-            if (courseCode == course.getCourseCode()) //try to find a match from the input
-            {
-                tempRoster.push_back(student);
-            }
-            continue;
-        }
-    }
+    // for (Student student : studentRoster)
+    // {
+    //     for (Course course : student.getClassList())
+    //     {
+    //         if (courseCode == course.getCourseCode()) //try to find a match from the input
+    //         {
+    //             tempRoster.push_back(student);
+    //         }
+    //         continue;
+    //     }
+    // }
 
-    cout << courseCode << " Student Roster" << endl;
-    for (Student s : tempRoster)
-    {
-        cout << s.getName() << " " << s.getUserID() << endl;
-    }
-    cout << "\nPlease Select the student ID number of with the grade you would like to modify: ";
-    cin >> studentID;
-    cout << endl;
-    for (Student s : tempRoster)
-    {
-        if (studentID == s.getUserID())
-        {
-            for (Course course : s.getClassList())
-            {
-                if (courseCode == course.getCourseCode()) //try to find a match from the input
-                {
-                    course.printReport();
-                    cout << "Please enter the Letter grade that you would like to give this student: ";
-                    cin >> letterGrade;
-                    course.setGrade(letterGrade);
-                    course.printReport();
-                }
-            }
-        }
-    }
+    // cout << courseCode << " Student Roster" << endl;
+    // for (Student s : tempRoster)
+    // {
+    //     cout << s.getName() << " " << s.getUserID() << endl;
+    // }
+    // cout << "\nPlease Select the student ID number of with the grade you would like to modify: ";
+    // cin >> studentID;
+    // cout << endl;
+    // for (Student s : tempRoster)
+    // {
+    //     if (studentID == s.getUserID())
+    //     {
+    //         for (Course course : s.getClassList())
+    //         {
+    //             if (courseCode == course.getCourseCode()) //try to find a match from the input
+    //             {
+    //                 course.printReport();
+    //                 cout << "Please enter the Letter grade that you would like to give this student: ";
+    //                 cin >> letterGrade;
+    //                 course.setGrade(letterGrade);
+    //                 course.printReport();
+    //             }
+    //         }
+    //     }
+    // }
 
-    /*
-    for(Student student: SIS.studentRoster){
-          int indexOf = find(student.courses.begin(), student.courses.end(), course);
-          if(indexOf != student.courses.end())
-          {
-              student.courses[indexOf].printreport();
-          }
-     }
-     */
+    // /*
+    // for(Student student: SIS.studentRoster){
+    //       int indexOf = find(student.courses.begin(), student.courses.end(), course);
+    //       if(indexOf != student.courses.end())
+    //       {
+    //           student.courses[indexOf].printreport();
+    //       }
+    //  }
+    //  */
 }
 void Faculty::runCommandCode(int command)
 {
@@ -110,14 +110,14 @@ void Faculty::runCommandCode(int command)
             this->listClasses();
             break;
         case 2:
-            //  this->editGrades(); 
-            cout << "Edit Grades" << endl; 
+             this->editGrades(); 
+            break;
         case 9:
             this-> showOptions();
             break;
         default:
             cout << "Invalid command, please eneter another command code." << endl;
-            this->showOptions();
+            // this->showOptions();
         };
     
 }
