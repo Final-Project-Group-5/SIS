@@ -79,17 +79,17 @@ void Student::runCommandCode(int command)
 {
     switch(command){
       case 1:
-        this->printReport();
+        // this->printReport();
         break;
       case 2:
-        this->registerForCourse(); 
+        // this->registerForCourse(); 
         break;
       case 9:
-        this-> showOptions();
+        // this-> showOptions();
         break;
       default:
         cout << "Invalid command, please eneter another command code." << endl;
-        this->showOptions();
+        // this->showOptions();
     }
 }
 

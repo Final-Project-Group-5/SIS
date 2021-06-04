@@ -176,7 +176,7 @@ void SIS::saveData()
 {
     ofstream outFile;
 
-    char outFilename[21] = "./Data/tempdata.txt";
+    char outFilename[17] = "./Data/data.txt";
     outFile.open(outFilename);
     cout << "Opening data file to save" << endl;
     if (outFile.fail())
