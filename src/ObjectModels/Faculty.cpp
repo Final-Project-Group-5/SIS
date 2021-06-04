@@ -14,7 +14,7 @@ public:
     Faculty() {}
     Faculty(int, string, string, string, string, vector<Course*>);
     ~Faculty();
-
+    string stringifyCourses();
     void listClasses();
     void editGrades();
     void runCommandCode(int);
@@ -38,6 +38,15 @@ Faculty::~Faculty()
     }
 }
 
+string Faculty::stringifyCourses()
+{
+  string temp;
+  for (Course* course : this->courses)
+  {
+    temp = (*course).getCourseCode()+","+to_string((*course).getCredits())+","+(*course).getInstructor()+","+ (*course).getGrade();
+  }
+  return temp;
+}
 
 void Faculty::listClasses()
 {

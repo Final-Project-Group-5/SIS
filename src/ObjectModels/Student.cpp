@@ -20,7 +20,7 @@ public:
   vector<Course*> getClassList();
   string getName();
   void registerForCourse(); // Friend of SIS
-
+  string stringifyCourses();
   void printReport();              // Prints current courses
   void runCommandCode(int);
 };
@@ -47,7 +47,7 @@ void Student::printReport()
   // Header for report
   cout << "Report for " << this->getName() << ".\nID number: " << this->getUserID() << endl;
   cout << "Course" << setw(15) << "Instructor" << setw(15) << "Credits" << setw(15) << "Grade" << endl;
-  cout << setw(60) << setfill('_') << "\n"
+  cout << setw(100) << setfill('_') << "\n"
        << setfill(' ') << endl;
 
   // For loop prints report from vector
@@ -55,6 +55,17 @@ void Student::printReport()
   {
     (*course).printReport();
   }
+}
+
+string Student::stringifyCourses()
+{
+  string temp="";
+  for (Course* course : this->courses)
+  {
+    temp += (*course).getCourseCode()+";"+to_string((*course).getCredits())+";"+(*course).getInstructor()+";"+ (*course).getGrade()+"|";
+  }
+  temp.pop_back();
+  return temp;
 }
 
 int Student::getId()

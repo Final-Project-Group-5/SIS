@@ -78,7 +78,7 @@ string User::getRole()
 
 ostream& operator<<(ostream& out, User& u) {
 
-    out << u.getUserID() <<"," << u.getUserName() <<"," << u.getName() <<"," << u.getPass() <<"," << u.getRole() <<"," << endl;
+    out << u.getUserID() <<"," << u.getUserName() <<"," << u.getName() <<"," << u.getPass() <<"," << u.getRole() <<",";
 
     return out;
 }

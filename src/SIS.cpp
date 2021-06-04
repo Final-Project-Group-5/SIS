@@ -83,20 +83,22 @@ void SIS::loadData()
         tempUserPassword = argVector[3];
         tempUserRole = argVector[4];
         
-        if(argVector[5].length()>1){
+        if(argVector[5].length()>10){
             // cout << argVector[5] << endl; 
             stringstream courseStream(argVector[5]);
             while(courseStream.good()){
+                courseDataArgs ={};
                 string courseData,
                         courseArg;
                 getline(courseStream, courseData, '|');
+                // cout << courseData << endl;
                 stringstream courseDataStream(courseData);
-
                 while(courseDataStream.good()){
+                    // cout << courseArg << endl;
                     getline(courseDataStream, courseArg, ';'); 
                     courseDataArgs.push_back(courseArg);
                 }
-                
+                cout << tempUserName << " course added" << endl;
                 Course* tempCourse = new Course(courseDataArgs[0],stoi(courseDataArgs[1]),courseDataArgs[2],courseDataArgs[3][0]);
                 tempCourses.push_back(tempCourse);
             }
@@ -208,15 +210,15 @@ void SIS::saveData()
 
     for (Staff* s: staffRoster)
         {   
-            outFile << s;;
+            outFile << (*s) << endl;
         }
     for (Faculty* f: facultyRoster)
         {   
-            outFile << f;;
+            outFile << (*f) << (*f).stringifyCourses() << endl;
         }
     for (Student* s: studentRoster)
         {
-            outFile << s;
+            outFile << (*s) << (*s).stringifyCourses() << endl;
         }
 
     outFile.close();

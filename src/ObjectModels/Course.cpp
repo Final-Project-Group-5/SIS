@@ -15,6 +15,7 @@ public:
     void printReport();
     void printReportFaculty();
     string getInstructor();
+    char getGrade();
     int getCredits();
     int getGPV();
     void setGrade(char);
@@ -66,6 +67,11 @@ string Course::getInstructor()
 int Course::getCredits()
 {
     return credits;
+};
+
+char Course::getGrade()
+{
+    return letterGrade;
 };
 
 int Course::getGPV()
