@@ -17,6 +17,7 @@ public:
     void showName();
     int getUserID();
     void showOptions();
+    void runCommandCode(int);
 
 protected:
     int userID;

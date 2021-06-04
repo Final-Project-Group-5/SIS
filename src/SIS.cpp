@@ -18,10 +18,11 @@ public:
     void exit();
     void runREPL();
     void test();
-    Faculty& currentFaculty();
-    Student& currentStudent();
-    Staff& currentStaff();
+
 private:
+    Faculty* currentFaculty=NULL;
+    Student* currentStudent=NULL;
+    Staff* currentStaff=NULL;
     // auto needs to be initialized at the time of declaration
     vector<Course> availableCourses;
     vector<Course> allCourses;
@@ -126,9 +127,7 @@ void SIS::authenticate()
                         cout << "Sorry that password was incorrect, please re-enter the password: ";
                         cin >> password;
                     }
-                    Staff *currentStaff = new Staff(s.getUserID(), s.getUserName(), s.getName(), s.getPass(), s.getRole());
-                    // Student currentStudent = NULL;
-                    // Faculty currentFaculty = NULL;
+                    currentStaff = &s;
                     cout << "Login Successful!" << endl;
                     continue;
                 }
@@ -145,9 +144,8 @@ void SIS::authenticate()
                         cout << "Sorry that password was incorrect, please re-enter the password: ";
                         cin >> password;
                     }
-                    Faculty *currentFaculty = new Faculty(f.getUserID(), f.getUserName(), f.getName(), f.getPass(), f.getRole());
-                    // Student currentStudent = NULL;
-                    // Staff currentStaff = NULL;
+                    currentFaculty = &f;
+                    
                     cout << "Login Successful!" << endl;
                     continue;
                 }
@@ -163,9 +161,7 @@ void SIS::authenticate()
                         cout << "Sorry that password was incorrect, please re-enter the password: ";
                         cin >> password;
                     }
-                    Student *currentStudent = new Student(s.getUserID(), s.getUserName(), s.getName(), s.getPass(), s.getRole());
-                    // Faculty currentFaculty = NULL;
-                    // Staff currentStaff = NULL;
+                    currentStudent = &s; 
                     cout << "Login Successful!" << endl;
                     continue;
                 
@@ -198,36 +194,28 @@ void SIS::runREPL()
 
     int REPLRunning = 1;
     // this -> currentUser.showOptions();
-    cout << "You can exit the command loop by entering option 0." << endl;
+    cout << "You can exit the command loop by entering option 0 and show your available options by entering 9." << endl;
+
+    //  currentFaculty!=NULL
+    //         ? currentFaculty->showOptions()
+    //     : currentStudent !=NULL
+    //         ? currentStudent->showOptions()
+    //     : currentStaff->showOptions();
+    
     while (REPLRunning)
-    {
-        if (currentFaculty !=NULL)
-        {
-            // currentFaculty.recieveCommandCode();
-        }
-        else if (currentStaff !=NULL)
-        {
-            // currentStaff.recieveCommandCode();
-        }
-        else if (currentStudent !=NULL)
-        {
-            // currentStudent.recieveCommandCode();
-        }
-        
+    {   
         cout << "Please enter a command: ";
         cin >> commandCode;
         if (commandCode == 0)
         {
             REPLRunning = 0;
         }
-        // if (count(this->currentUser.commandList.begin(), this->currentUser.commandList.end(), commandCode))
-        // {
-        //     // this ->currentUser.runCommand(commandCode);
-        // }
-        // else
-        // {
-        //     cout << "Input error, please re-enter a valid command";
-        // }
+        
+        currentFaculty!=NULL
+            ? currentFaculty->runCommandCode(commandCode)
+        : currentStudent !=NULL
+            ? currentStudent->runCommandCode(commandCode)
+        : currentStaff->runCommandCode(commandCode);
     };
 }
 void SIS::run()
@@ -236,7 +224,7 @@ void SIS::run()
     cout << "Welcome to SIS." << endl;
     this->loadData();
     this->authenticate();
-    this->test();
+    // this->test();
     this->runREPL();
     this->exit();
 };
