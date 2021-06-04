@@ -12,6 +12,7 @@ public:
     void printStudentReport();
     void addInstructorToCourse();
     void addCourseToCatalog();
+    void recieveCommandCode();
 };
 
 Staff::Staff(int id, string username, string name, string pass, string userRole)

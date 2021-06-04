@@ -18,10 +18,9 @@ public:
     void exit();
     void runREPL();
     void test();
-    Faculty currentUserFa;
-    Student currentUserSu;
-    Staff currentUserSa;
-    SIS *userPointer;
+    Faculty& currentFaculty();
+    Student& currentStudent();
+    Staff& currentStaff();
 private:
     // auto needs to be initialized at the time of declaration
     vector<Course> availableCourses;
@@ -127,6 +126,9 @@ void SIS::authenticate()
                         cout << "Sorry that password was incorrect, please re-enter the password: ";
                         cin >> password;
                     }
+                    Staff *currentStaff = new Staff(s.getUserID(), s.getUserName(), s.getName(), s.getPass(), s.getRole());
+                    // Student currentStudent = NULL;
+                    // Faculty currentFaculty = NULL;
                     cout << "Login Successful!" << endl;
                     continue;
                 }
@@ -143,9 +145,10 @@ void SIS::authenticate()
                         cout << "Sorry that password was incorrect, please re-enter the password: ";
                         cin >> password;
                     }
+                    Faculty *currentFaculty = new Faculty(f.getUserID(), f.getUserName(), f.getName(), f.getPass(), f.getRole());
+                    // Student currentStudent = NULL;
+                    // Staff currentStaff = NULL;
                     cout << "Login Successful!" << endl;
-                    Faculty *currentUserFa = new Faculty(f.getUserID(), f.getUserName(), f.getName(), f.getPass(), f.getRole());
-                    userPointer = currentUserFa;
                     continue;
                 }
             }
@@ -160,6 +163,9 @@ void SIS::authenticate()
                         cout << "Sorry that password was incorrect, please re-enter the password: ";
                         cin >> password;
                     }
+                    Student *currentStudent = new Student(s.getUserID(), s.getUserName(), s.getName(), s.getPass(), s.getRole());
+                    // Faculty currentFaculty = NULL;
+                    // Staff currentStaff = NULL;
                     cout << "Login Successful!" << endl;
                     continue;
                 
@@ -195,6 +201,19 @@ void SIS::runREPL()
     cout << "You can exit the command loop by entering option 0." << endl;
     while (REPLRunning)
     {
+        if (currentFaculty !=NULL)
+        {
+            // currentFaculty.recieveCommandCode();
+        }
+        else if (currentStaff !=NULL)
+        {
+            // currentStaff.recieveCommandCode();
+        }
+        else if (currentStudent !=NULL)
+        {
+            // currentStudent.recieveCommandCode();
+        }
+        
         cout << "Please enter a command: ";
         cin >> commandCode;
         if (commandCode == 0)
@@ -226,28 +245,6 @@ void SIS::test()
 {
     cout << setfill(' ') << setw(25) << "This is a test\n\n"
          << endl;
-
- User user1 = User(1, "rsmith", "Robert Smith", "password1", "staff");
-    //user1.showOptions();
-    Course c1 = Course("calc2", 5, 'A', "M.Hubbard");
-    Course c2 = Course("calc3", 5, 'A', "M.Hubbard");
-    vector<Course> v1 = {c1, c2};
-    Student s1 = Student(1, "rsmith", "Robert Smith", "password1", "student", v1);
-    Student s2 = Student(2, "rsmith", "Omar Salah", "password1", "student", v1);
-    Student s3 = Student(3, "rsmith", "Justin Kang", "password1", "student", v1);
-
-    studentRoster.push_back(s1);
-    studentRoster.push_back(s2);
-    studentRoster.push_back(s3);
-
-    this->userPointer = Faculty(2, "pjohnson", "Patricia Johnson", "password2", "faculty", v1);
-    cout << endl;
-
-    //this->printStudentRoster();
-    userPointer.editGrades(studentRoster);
-    s3.printReport();
-
-    this->userPointer.showOptions();
 
     cout << "\n\n"
          << "Test Over"

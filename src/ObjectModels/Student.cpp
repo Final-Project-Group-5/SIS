@@ -21,6 +21,7 @@ public:
 
   void printReport();              // Prints current courses
   friend void registerForCourse(); // Friend of SIS
+  void recieveCommandCode();
 };
 
 Student::Student(int id, string username, string name, string pass, string userRole, vector<Course> classList = {})

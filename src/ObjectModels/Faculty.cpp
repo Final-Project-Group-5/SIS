@@ -16,6 +16,7 @@ public:
 
     void listClasses();
     void editGrades(vector<Student> studentRoster);
+    void recieveCommandCode();
 };
 
 Faculty::Faculty(int id, string username, string name, string pass, string userRole, vector<Course> classList = {})
