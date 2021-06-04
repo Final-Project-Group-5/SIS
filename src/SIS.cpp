@@ -184,6 +184,20 @@ void SIS::saveData()
         cout << "Failed to open the output file" << endl;
         std::exit(1);
     };
+
+    for (Staff s: staffRoster)
+        {   
+            outFile << s;;
+        }
+    for (Faculty f: facultyRoster)
+        {   
+            outFile << f;;
+        }
+    for (Student s: studentRoster)
+        {
+            outFile << s;
+        }
+
     outFile.close();
     cout << "Data successfully saved" << endl;
 }

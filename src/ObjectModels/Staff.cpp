@@ -42,20 +42,20 @@ void Staff::runCommandCode(int command)
 {
     switch(command){
       case 1:
-        this->printStudentReport();
+        // this->printStudentReport();
         break;
     case 2:
-        this->addInstructorToCourse();
+        // this->addInstructorToCourse();
         break;
       case 3:
-        this->addCourseToCatalog();
+        // this->addCourseToCatalog();
         break;
     case 9:
-        this-> showOptions();
+        // this-> showOptions();
         break;
     default:
         cout << "Invalid command, please eneter another command code." << endl;
-        this->showOptions();
+        // this->showOptions();
     }
   
 }

@@ -18,6 +18,7 @@ public:
     int getUserID();
     void showOptions();
     void runCommandCode(int);
+    friend ostream& operator<<(ostream&, User&);
 
 protected:
     int userID;
@@ -73,4 +74,11 @@ int User::getUserID()
 string User::getRole()
 {
     return role;
+}
+
+ostream& operator<<(ostream& out, User& u) {
+
+    out << u.getUserID() <<"," << u.getUserName() <<"," << u.getName() <<"," << u.getPass() <<"," << u.getRole() <<"," << endl;
+
+    return out;
 }

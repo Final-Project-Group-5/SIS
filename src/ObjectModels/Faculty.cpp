@@ -110,7 +110,7 @@ void Faculty::runCommandCode(int command)
             this->listClasses();
             break;
         case 2:
-             this->editGrades(); 
+            //  this->editGrades(); 
             cout << "Edit Grades" << endl; 
         case 9:
             this-> showOptions();
