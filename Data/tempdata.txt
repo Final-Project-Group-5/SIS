@@ -2,7 +2,7 @@
 8,kgarcia,Karen Garcia,password8,staff,
 2,pjohnson,Patricia Johnson,password2,faculty,
 6,jmiller,John Miller,password6,faculty,
-3,bwilliams,Barabara Williams,password3,student,
-4,lbrown,Linda Brown,password4,student,
-5,mjones,Michael Jones,password5,student,
-7,sdavis,Susan Davis,password7,student,
+3,bwilliams,Barabara Williams,password3,
+4,lbrown,Linda Brown,password4,student,BIO-106;John Miller;4;A|CHEM-106;John Miller;4;A|
+5,mjones,Michael Jones,password5,student,BIO-106;John Miller;4;A|CHEM-106;John Miller;4;A|
+7,sdavis,Susan Davis,password7,student,BIO-106;John Miller;4;A|CHEM-106;John Miller;4;A|

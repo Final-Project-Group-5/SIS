@@ -8,15 +8,16 @@ using namespace std;
 class Student : public User
 { // Sub class
 private:
-  vector<Course> courses;
+  vector<Course*> courses;
 
 public:
   Student() {}
-  Student(int, string, string, string, string, vector<Course>);
+  Student(int, string, string, string, string, vector<Course*>);
+  ~Student();
   int getId();
   string getUsername();
   string getPass();
-  vector<Course> getClassList();
+  vector<Course*> getClassList();
   string getName();
   void registerForCourse(); // Friend of SIS
 
@@ -24,7 +25,7 @@ public:
   void runCommandCode(int);
 };
 
-Student::Student(int id, string username, string name, string pass, string userRole, vector<Course> classList = {})
+Student::Student(int id, string username, string name, string pass, string userRole, vector<Course*> classList = {})
 {
   this->userID = id;
   this->userName = username;
@@ -33,6 +34,12 @@ Student::Student(int id, string username, string name, string pass, string userR
   this->role = userRole;
   this->optionsList = {"Students Menu:", "1   Print Grade Report", "2   Register for Classes"};
   courses = classList;
+};
+Student::~Student()
+{
+  for(Course* c: this->courses){
+    delete c;
+  }
 };
 
 void Student::printReport()
@@ -44,9 +51,9 @@ void Student::printReport()
        << setfill(' ') << endl;
 
   // For loop prints report from vector
-  for (Course course : this->courses)
+  for (Course* course : this->courses)
   {
-    course.printReport();
+    (*course).printReport();
   }
 }
 
@@ -65,7 +72,7 @@ string Student::getPass()
   return password;
 }
 
-vector<Course> Student::getClassList()
+vector<Course*> Student::getClassList()
 {
   return courses;
 }

@@ -5,6 +5,7 @@
 #include <algorithm>
 #include <sstream>
 
+
 using namespace std;
 
 class SIS
@@ -56,40 +57,61 @@ void SIS::loadData()
     while (getline(inFile, line))
     {
         // cout << line << endl;
-        stringstream s_stream(line); //create string stream from the string
 
         vector<string> argVector;
+        vector<string> courseDataArgs;
+        vector<Course*> tempCourses;
 
         int tempID;
 
         string tempUserName,
             tempUserFullName,
             tempUserPassword,
-            tempUserRole,
-            tempCourseVStr;
+            tempUserRole;
 
+        stringstream s_stream(line); //create string stream from the string
         while (s_stream.good())
         {
             string arg;
             getline(s_stream, arg, ','); //get first string delimited by comma
             argVector.push_back(arg);
         };
-
+        
         tempID = stoi(argVector[0]);
         tempUserName = argVector[1];
         tempUserFullName = argVector[2];
         tempUserPassword = argVector[3];
         tempUserRole = argVector[4];
         
+        if(argVector[5].length()>1){
+            // cout << argVector[5] << endl; 
+            stringstream courseStream(argVector[5]);
+            while(courseStream.good()){
+                string courseData,
+                        courseArg;
+                getline(courseStream, courseData, '|');
+                stringstream courseDataStream(courseData);
+
+                while(courseDataStream.good()){
+                    getline(courseDataStream, courseArg, ';'); 
+                    courseDataArgs.push_back(courseArg);
+                }
+                
+                Course* tempCourse = new Course(courseDataArgs[0],stoi(courseDataArgs[1]),courseDataArgs[2],courseDataArgs[3][0]);
+                tempCourses.push_back(tempCourse);
+            }
+
+
+        }
 
         if (tempUserRole == "student")
         {
-            Student* tempStudent = new Student(tempID, tempUserName, tempUserFullName, tempUserPassword, tempUserRole);
+            Student* tempStudent = new Student(tempID, tempUserName, tempUserFullName, tempUserPassword, tempUserRole, tempCourses);
             this->studentRoster.push_back(tempStudent);
         }
         else if (tempUserRole == "faculty")
         {
-            Faculty* tempFaculty = new Faculty(tempID, tempUserName, tempUserFullName, tempUserPassword, tempUserRole);
+            Faculty* tempFaculty = new Faculty(tempID, tempUserName, tempUserFullName, tempUserPassword, tempUserRole, tempCourses);
             this->facultyRoster.push_back(tempFaculty);
         }
         else
@@ -222,6 +244,7 @@ void SIS::runREPL()
         if (commandCode == 0)
         {
             REPLRunning = 0;
+            continue;
         }
         
         currentFaculty!=NULL
@@ -268,11 +291,11 @@ void SIS::exit()
         {   
             delete s;
         }
-    for (Faculty f: facultyRoster)
+    for (Faculty* f: facultyRoster)
         {   
             delete f;
         }
-    for (Student s: studentRoster)
+    for (Student* s: studentRoster)
         {
             delete s;
         }

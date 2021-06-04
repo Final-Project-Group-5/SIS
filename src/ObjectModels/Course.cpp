@@ -10,7 +10,7 @@ using namespace std;
 class Course
 {
 public:
-    Course(string, int, char, string);
+    Course(string, int, string, char);
     string getCourseCode();
     void printReport();
     void printReportFaculty();
@@ -27,7 +27,7 @@ private:
     char letterGrade;
 };
 
-Course::Course(string code, int credit, char grade = 'N', string professor = "TBD")
+Course::Course(string code, int credit,string professor = "TBD", char grade = 'N')
 {
     instructor = professor;
     courseCode = code;

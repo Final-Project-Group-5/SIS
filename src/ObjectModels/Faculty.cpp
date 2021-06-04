@@ -8,18 +8,19 @@ using namespace std;
 class Faculty : public User
 {
 private:
-    vector<Course> courses;
+    vector<Course*> courses;
 
 public:
     Faculty() {}
-    Faculty(int, string, string, string, string, vector<Course>);
+    Faculty(int, string, string, string, string, vector<Course*>);
+    ~Faculty();
 
     void listClasses();
     void editGrades();
     void runCommandCode(int);
 };
 
-Faculty::Faculty(int id, string username, string name, string pass, string userRole, vector<Course> classList = {})
+Faculty::Faculty(int id, string username, string name, string pass, string userRole, vector<Course*> classList = {})
 {
     this->userID = id;
     this->userName = username;
@@ -30,13 +31,21 @@ Faculty::Faculty(int id, string username, string name, string pass, string userR
     courses = classList;
 };
 
+Faculty::~Faculty()
+{
+    for(Course* c: this->courses){
+        delete c;
+    }
+}
+
+
 void Faculty::listClasses()
 {
     cout << "This is the list of courses you are instructing: \n\n"
          << endl;
-    for (Course course : this->courses)
+    for (Course* course : this->courses)
     {
-        course.printReportFaculty();
+        (*course).printReportFaculty();
     }
 }
 
