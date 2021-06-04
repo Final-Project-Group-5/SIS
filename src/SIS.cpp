@@ -20,6 +20,9 @@ public:
     void test();
 
 private:
+    Faculty* currentFaculty=NULL;
+    Student* currentStudent=NULL;
+    Staff* currentStaff=NULL;
     // auto needs to be initialized at the time of declaration
     vector<Course> availableCourses;
     vector<Course> allCourses;
@@ -124,6 +127,7 @@ void SIS::authenticate()
                         cout << "Sorry that password was incorrect, please re-enter the password: ";
                         cin >> password;
                     }
+                    currentStaff = &s;
                     cout << "Login Successful!" << endl;
                     continue;
                 }
@@ -140,6 +144,8 @@ void SIS::authenticate()
                         cout << "Sorry that password was incorrect, please re-enter the password: ";
                         cin >> password;
                     }
+                    currentFaculty = &f;
+                    
                     cout << "Login Successful!" << endl;
                     continue;
                 }
@@ -155,6 +161,7 @@ void SIS::authenticate()
                         cout << "Sorry that password was incorrect, please re-enter the password: ";
                         cin >> password;
                     }
+                    currentStudent = &s; 
                     cout << "Login Successful!" << endl;
                     continue;
                 
@@ -169,7 +176,7 @@ void SIS::saveData()
 {
     ofstream outFile;
 
-    char outFilename[21] = "./Data/tempdata.txt";
+    char outFilename[17] = "./Data/data.txt";
     outFile.open(outFilename);
     cout << "Opening data file to save" << endl;
     if (outFile.fail())
@@ -177,6 +184,20 @@ void SIS::saveData()
         cout << "Failed to open the output file" << endl;
         std::exit(1);
     };
+
+    for (Staff s: staffRoster)
+        {   
+            outFile << s;;
+        }
+    for (Faculty f: facultyRoster)
+        {   
+            outFile << f;;
+        }
+    for (Student s: studentRoster)
+        {
+            outFile << s;
+        }
+
     outFile.close();
     cout << "Data successfully saved" << endl;
 }
@@ -187,23 +208,28 @@ void SIS::runREPL()
 
     int REPLRunning = 1;
     // this -> currentUser.showOptions();
-    cout << "You can exit the command loop by entering option 0." << endl;
+    cout << "You can exit the command loop by entering option 0 and show your available options by entering 9." << endl;
+
+    //  currentFaculty!=NULL
+    //         ? currentFaculty->showOptions()
+    //     : currentStudent !=NULL
+    //         ? currentStudent->showOptions()
+    //     : currentStaff->showOptions();
+    
     while (REPLRunning)
-    {
+    {   
         cout << "Please enter a command: ";
         cin >> commandCode;
         if (commandCode == 0)
         {
             REPLRunning = 0;
         }
-        // if (count(this->currentUser.commandList.begin(), this->currentUser.commandList.end(), commandCode))
-        // {
-        //     // this ->currentUser.runCommand(commandCode);
-        // }
-        // else
-        // {
-        //     cout << "Input error, please re-enter a valid command";
-        // }
+        
+        currentFaculty!=NULL
+            ? currentFaculty->runCommandCode(commandCode)
+        : currentStudent !=NULL
+            ? currentStudent->runCommandCode(commandCode)
+        : currentStaff->runCommandCode(commandCode);
     };
 }
 void SIS::run()
@@ -211,9 +237,8 @@ void SIS::run()
 
     cout << "Welcome to SIS." << endl;
     this->loadData();
-    this->test();
     this->authenticate();
-    // this->currentUser.printOptions()
+    // this->test();
     this->runREPL();
     this->exit();
 };

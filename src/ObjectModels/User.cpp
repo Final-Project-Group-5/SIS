@@ -12,10 +12,13 @@ public:
     string getName();
     string getUserName();
     string getPass();
+    string getRole();
     void showID();
     void showName();
     int getUserID();
     void showOptions();
+    void runCommandCode(int);
+    friend ostream& operator<<(ostream&, User&);
 
 protected:
     int userID;
@@ -66,4 +69,16 @@ string User::getPass()
 int User::getUserID()
 {
     return userID;
+}
+
+string User::getRole()
+{
+    return role;
+}
+
+ostream& operator<<(ostream& out, User& u) {
+
+    out << u.getUserID() <<"," << u.getUserName() <<"," << u.getName() <<"," << u.getPass() <<"," << u.getRole() <<"," << endl;
+
+    return out;
 }

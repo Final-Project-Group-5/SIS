@@ -18,9 +18,10 @@ public:
   string getPass();
   vector<Course> getClassList();
   string getName();
+  void registerForCourse(); // Friend of SIS
 
   void printReport();              // Prints current courses
-  friend void registerForCourse(); // Friend of SIS
+  void runCommandCode(int);
 };
 
 Student::Student(int id, string username, string name, string pass, string userRole, vector<Course> classList = {})
@@ -74,7 +75,26 @@ string Student::getName()
   return fullName;
 }
 
-void registerForCourse()
+void Student::runCommandCode(int command)
+{
+    switch(command){
+      case 1:
+        // this->printReport();
+        break;
+      case 2:
+        // this->registerForCourse(); 
+        break;
+      case 9:
+        // this-> showOptions();
+        break;
+      default:
+        cout << "Invalid command, please eneter another command code." << endl;
+        // this->showOptions();
+    }
+}
+
+
+void Student::registerForCourse()
 {
   string courseCode;
   cout << "Here are the avalible courses to take this semester: " << endl;

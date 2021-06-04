@@ -16,6 +16,7 @@ public:
 
     void listClasses();
     void editGrades(vector<Student> studentRoster);
+    void runCommandCode(int);
 };
 
 Faculty::Faculty(int id, string username, string name, string pass, string userRole, vector<Course> classList = {})
@@ -101,4 +102,22 @@ void Faculty::editGrades(vector<Student> studentRoster)
           }
      }
      */
+}
+void Faculty::runCommandCode(int command)
+{
+        switch(command){
+        case 1:
+            this->listClasses();
+            break;
+        case 2:
+            //  this->editGrades(); 
+            cout << "Edit Grades" << endl; 
+        case 9:
+            this-> showOptions();
+            break;
+        default:
+            cout << "Invalid command, please eneter another command code." << endl;
+            this->showOptions();
+        };
+    
 }
