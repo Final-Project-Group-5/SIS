@@ -24,7 +24,6 @@ private:
     Faculty* currentFaculty=NULL;
     Student* currentStudent=NULL;
     Staff* currentStaff=NULL;
-    // auto needs to be initialized at the time of declaration
     vector<Course> availableCourses;
     vector<Course> allCourses;
     vector<Student*> studentRoster;
@@ -83,7 +82,7 @@ void SIS::loadData()
         tempUserPassword = argVector[3];
         tempUserRole = argVector[4];
         
-        if(argVector[5].length()>10){
+        if(argVector[5].length()>1){
             // cout << argVector[5] << endl; 
             stringstream courseStream(argVector[5]);
             while(courseStream.good()){
